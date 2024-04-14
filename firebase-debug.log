@@ -1,0 +1,58 @@
+[debug] [2024-04-14T17:21:11.599Z] ----------------------------------------------------------------------
+[debug] [2024-04-14T17:21:11.604Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init functions
+[debug] [2024-04-14T17:21:11.605Z] CLI Version:   13.7.2
+[debug] [2024-04-14T17:21:11.605Z] Platform:      linux
+[debug] [2024-04-14T17:21:11.606Z] Node Version:  v18.18.2
+[debug] [2024-04-14T17:21:11.607Z] Time:          Sun Apr 14 2024 19:21:11 GMT+0200 (Central European Summer Time)
+[debug] [2024-04-14T17:21:11.607Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-04-14T17:21:11.765Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-04-14T17:21:11.766Z] > authorizing via signed-in user (originalmartin97@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/martin/projects/firebase/faiqna-dev
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-04-14T17:21:11.776Z] Using project from CLI flag: faiqna-dev
+[debug] [2024-04-14T17:21:11.781Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/faiqna-dev [none]
+[debug] [2024-04-14T17:21:12.175Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/faiqna-dev 200
+[debug] [2024-04-14T17:21:12.176Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/faiqna-dev {"projectId":"faiqna-dev","projectNumber":"941418167562","displayName":"faiqna-dev","name":"projects/faiqna-dev","resources":{"hostingSite":"faiqna-dev","storageBucket":"faiqna-dev.appspot.com","locationId":"europe-west"},"state":"ACTIVE","etag":"1_602b6804-1d09-4b8c-b517-42fad28f1a1a"}
+[info] i  Using project faiqna-dev (faiqna-dev) 
+[info] 
+=== Functions Setup
+[debug] [2024-04-14T17:21:12.223Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-04-14T17:21:12.224Z] > authorizing via signed-in user (originalmartin97@gmail.com)
+[debug] [2024-04-14T17:21:12.224Z] [iam] checking project faiqna-dev for permissions ["firebase.projects.get"]
+[debug] [2024-04-14T17:21:12.225Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/faiqna-dev:testIamPermissions [none]
+[debug] [2024-04-14T17:21:12.225Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/faiqna-dev:testIamPermissions x-goog-quota-user=projects/faiqna-dev
+[debug] [2024-04-14T17:21:12.225Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/faiqna-dev:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-04-14T17:21:13.073Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/faiqna-dev:testIamPermissions 200
+[debug] [2024-04-14T17:21:13.073Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/faiqna-dev:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-04-14T17:21:13.075Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/faiqna-dev/services/cloudfunctions.googleapis.com [none]
+[debug] [2024-04-14T17:21:13.075Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/faiqna-dev/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/faiqna-dev
+[debug] [2024-04-14T17:21:13.078Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/faiqna-dev/services/runtimeconfig.googleapis.com [none]
+[debug] [2024-04-14T17:21:13.078Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/faiqna-dev/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/faiqna-dev
+[debug] [2024-04-14T17:21:14.134Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/faiqna-dev/services/cloudfunctions.googleapis.com 200
+[debug] [2024-04-14T17:21:14.134Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/faiqna-dev/services/cloudfunctions.googleapis.com [omitted]
+[debug] [2024-04-14T17:21:14.172Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/faiqna-dev/services/runtimeconfig.googleapis.com 200
+[debug] [2024-04-14T17:21:14.172Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/faiqna-dev/services/runtimeconfig.googleapis.com [omitted]
+[info] 
+Detected existing codebase(s): default
+
