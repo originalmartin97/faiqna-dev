@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { OpenAI } from 'openai';
 
-const openai = new OpenAI({ apiKey: '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'});
+const openai = new OpenAI({ apiKey: ''});
 
 async function generateResponse(prompt) {
   const response = await openai.Completion.create({
