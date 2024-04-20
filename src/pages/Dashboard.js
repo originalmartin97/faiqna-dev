@@ -1,14 +1,17 @@
 import React from 'react';
-import InputFile from '../components/inputFile';
-
+import InputFile from '../components/InputFile';
+import ShowResponse from '../components/ShowResponse';
+import { AppFront, GeneralPaper} from '../components/mui'; // Replace with the actual path to mui.js
 
 function Dashboard() {
     return (
-        <div>
-            <h1>Dashboard</h1>
+      <AppFront>
+        <GeneralPaper>
             <InputFile />
-        </div>
+            <ShowResponse />
+        </GeneralPaper>
+      </AppFront>
     );
-}
+  }
 
 export default Dashboard;

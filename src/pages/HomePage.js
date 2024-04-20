@@ -1,20 +1,17 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { GeneralButton } from '../components/mui';
+import { MySignIn, MySignOut } from '../components/Auth';
+import { AppFront, GeneralPaper }from '../components/mui';
 
 const HomePage = () => {
-    const navigate = useNavigate();
-
-    const handleButtonClick = () => {
-        navigate('/dashboard');
-    };
-
     return (
-        <div style={{ textAlign: 'center' }}>
+        <AppFront>
+            <GeneralPaper>
             <h1>Welcome, visitor!</h1>
-            <GeneralButton onClick={handleButtonClick}>Let's start</GeneralButton>
-        </div>
-    );
+            <MySignIn />
+            <MySignOut />
+            </GeneralPaper>
+        </AppFront>
+    )
 };
 
 export default HomePage;

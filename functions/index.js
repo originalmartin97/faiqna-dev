@@ -28,33 +28,44 @@ exports.processFile = functions.storage.object().onFinalize(async (object) => {
   await bucket.file(filePath).download({destination: tempFilePath});
   console.log(`File downloaded to: ${tempFilePath}`);
   
-  let contents;
+  let prompt;
+
+  const parameters = 'Create 3 to 10 questions in a section called "Questions" and 3 possible "Answers" for those ' +
+  'questions but with only one being exactly correct by the given text for this text given below:\n\n'
+
+  const command = '\n\nIn your response: firstly show only the questions generated; use only the language based on the given text beforehand; ' +
+  'for the answers, flag the only correct ones from the possibilities with adding a "*" right after them; The "Questions" and "Answers" sections must be separated from each other; ' +
+  'The generated answers for the questions must be indicated matching their pairing questions like this:\n' +
+  '"1/1 first possible answer for the first question\n' +
+  '1/2 second possible answer for the first question"\n and iterating so on...'
+
   const fileExtension = path.extname(filePath);
   if (fileExtension === '.docx') {
     const { value } = await mammoth.extractRawText({ path: tempFilePath });
-    contents = value;
+    prompt = value;
   } else if (fileExtension === '.pdf') {
     const buffer = fs.readFileSync(tempFilePath);
     const data = await pdfParse(buffer);
-    contents = data.text;
+    prompt = data.text;
   } else if (fileExtension === '.xlsx') {
     const workbook = xlsx.readFile(tempFilePath);
     const sheetNames = workbook.SheetNames;
-    contents = sheetNames.map(name => xlsx.utils.sheet_to_txt(workbook.Sheets[name])).join('\n');
+    prompt = sheetNames.map(name => xlsx.utils.sheet_to_txt(workbook.Sheets[name])).join('\n');
   } else {
-    // PLAIN TEXT
+    // PLAIN TEXT - Use this for testing!!
     const buffer = fs.readFileSync(tempFilePath);
     const detected = jschardet.detect(buffer);
-    contents = iconv.decode(buffer, detected.encoding);
+    prompt = iconv.decode(buffer, detected.encoding);
+    prompt = `${parameters}${prompt}${command}`;
   }
 
-  console.log(`Extracted contents: ${contents.substring(0, 100)}...`); // Log the first 100 characters
+  console.log(`Extracted prompt: ${prompt.substring(0, 100)}...`); // Log the first 100 characters
 
-  // Write the contents to Firestore.
-  await admin.firestore().collection('files').doc(path.basename(filePath)).set({ contents });
+  // Write the prompt to Firestore.
+  await admin.firestore().collection('files').doc(path.basename(filePath)).set({ prompt, uploaded_at: admin.firestore.FieldValue.serverTimestamp() });
   console.log(`Contents written to Firestore`);
 
-  // Once the contents has been saved to Firestore, we delete the temporary file.
+  // Once the prompt has been saved to Firestore, we delete the temporary file.
   fs.unlinkSync(tempFilePath);
   console.log(`Temporary file deleted`);
 });
