@@ -1,15 +1,27 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import Dashboard from './pages/Dashboard';
+import { React, useEffect } from 'react'
+import useStore from './store'
+import { auth } from './firebase'
+import DashboardScreen from './screens/DashboardScreen'
+import PublicRoute from './utils/PublicRoute'
+import PrivateRoute from './utils/PrivateRoute'
+import { onAuthStateChanged } from 'firebase/auth'
+import AuthenticationScreen from './screens/AuthenticationScreen'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
+  const { loading, setLoginStatus } = useStore()
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setLoginStatus(!!user);
+    });
+    return () => unsubscribe();
+  }, [setLoginStatus]);
   return (
     <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<PublicRoute Component={AuthenticationScreen} />} />
+        <Route path="/dashboard" element={<PrivateRoute Component={DashboardScreen} />} />
+      </Routes>
     </Router>
   );
 }

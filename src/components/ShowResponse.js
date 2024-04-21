@@ -1,6 +1,5 @@
 import React from 'react';
 import { useLatestResponse } from '../hooks/useApp';
-import { GeneralCard } from './mui';
 
 
 const ShowResponse = () => {
@@ -8,14 +7,14 @@ const ShowResponse = () => {
     
     // Split the response into lines and map each line to a JSX element
     const responseLines = response ? (
-        <GeneralCard>
+        <div>
             {response.split('\n').map((line, index) => (
                 <React.Fragment key={index}>
                     {line}
                     <br />
                 </React.Fragment>
             ))}
-        </GeneralCard>
+        </div>
     ) : null;
 
     return responseLines

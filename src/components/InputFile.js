@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { storage } from '../config/firebase'
 import { ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
-import { GeneralCard, GeneralButton } from './mui';
 
 function InputFile() {
   const [fileUpload, setFileUpload] = useState(null);
@@ -28,7 +27,6 @@ function InputFile() {
   };
 
   return (
-    <GeneralCard>
       <div className="InputFile">
         <input
           type='file'
@@ -36,11 +34,10 @@ function InputFile() {
           onChange={handleFileChange}
           style={{ display: 'none' }} // Hide the default file input
         />
-        <GeneralButton onClick={handleFileSelect}>Choose File</GeneralButton>
+        <button onClick={handleFileSelect}>Choose File</button>
         {selectedFileName && <p>Selected file: {selectedFileName}</p>} {/* Display selected file name */}
-        <GeneralButton onClick={uploadFile}>Upload file</GeneralButton>
+        <button onClick={uploadFile}>Upload file</button>
       </div>
-    </GeneralCard>
   );
 }
 
