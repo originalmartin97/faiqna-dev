@@ -18,7 +18,7 @@ const flexCenterRow = {
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#A5D6A7",
+      main: "#3F6837",
     },
     secondary: {
       main: "#E8F5E9",
@@ -35,6 +35,7 @@ export const theme = createTheme({
           padding: "1rem",
           margin: ".5rem",
           borderRadius: "2rem",
+          color: "white",
         },
       },
     },
