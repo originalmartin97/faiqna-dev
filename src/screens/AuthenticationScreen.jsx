@@ -39,12 +39,14 @@ const AuthenticationScreen = () => {
                 </Typography>
             </Box>
             <Card>
-                <Box>
+                <Box margin="1.8rem">
                     <TextField
                         name="email"
                         required
-                        id="outlined-email-input"
+                        id="standard-email-input"
                         label="Email"
+                        type="email"
+                        variant='standard'
                         value={form.email}
                         onChange={handleChange}
                     />
@@ -54,6 +56,7 @@ const AuthenticationScreen = () => {
                         id="outlined-password-input"
                         label="Password"
                         type="password"
+                        variant='standard'
                         autoComplete="current-password"
                         value={form.password}
                         onChange={handleChange}

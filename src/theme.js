@@ -14,7 +14,6 @@ const flexCenterRow = {
   justifyContent: "center",
 };
 
-
 export const theme = createTheme({
   typography: {
     fontFamily: "'Nunito', sans-serif",
@@ -95,7 +94,7 @@ export const theme = createTheme({
         root: {
           ...flexCenterRow,
           margin: ".7rem",
-          borderRadius: "2rem",
+
         },
       },
     },
@@ -103,6 +102,14 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: "1rem",
+          backgroundColor: "#e1f6ea",
+        },
+      },
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: "#e1f6ea",
         },
       },
     },
