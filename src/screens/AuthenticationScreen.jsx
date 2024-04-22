@@ -87,7 +87,7 @@ const AuthenticationScreen = () => {
                     </Box>
                 </Box>
             </Card>
-        </Container>
+        </Container >
     )
 }
 

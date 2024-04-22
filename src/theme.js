@@ -16,15 +16,28 @@ const flexCenterRow = {
 
 
 export const theme = createTheme({
+  typography: {
+    fontFamily: "'Nunito', sans-serif",
+  },
   palette: {
     primary: {
-      main: "#3F6837",
+      main: "#2D6A51",
     },
     secondary: {
-      main: "#E8F5E9",
+      main: "#99BDB1",
+    },
+    background: {
+      default: "#F7FAF7"
     },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: "#ebfce7",
+        },
+      },
+    },
     MuiButton: {
       defaultProps: {
         variant: "contained",
@@ -32,10 +45,13 @@ export const theme = createTheme({
       },
       styleOverrides: {
         root: {
-          padding: "1rem",
-          margin: ".5rem",
+          padding: "1.3rem",
+          margin: ".8rem",
           borderRadius: "2rem",
-          color: "white",
+          color: "#F7FAF7",
+          fontWeight: "bold",
+          textTransform: "none",
+          boxShadow: `2px 2.5px 4px 1.5px rgba(0, 0, 0, .25)`,
         },
       },
     },
@@ -58,7 +74,7 @@ export const theme = createTheme({
     MuiTypography: {
       styleOverrides: {
         root: {
-          margin: "2rem",
+          margin: "1.5rem",
         },
         h1: {
           fontSize: "2rem",
@@ -78,7 +94,15 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           ...flexCenterRow,
-          margin: ".5rem",
+          margin: ".7rem",
+          borderRadius: "2rem",
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: "1rem",
         },
       },
     },

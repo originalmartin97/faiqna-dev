@@ -1,8 +1,8 @@
-import { Container, Typography, Button, Box, Card } from '@mui/material';
-import React from 'react';
-import { useAuth } from '../hooks/useAuth';
-import { signOut } from 'firebase/auth';
-import { auth } from '../firebase';
+import { Container, Button } from '@mui/material'
+import React from 'react'
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebase'
+import MenuAppBard from '../components/AppBar'
 
 function DashboardScreen() {
   return (
@@ -11,7 +11,7 @@ function DashboardScreen() {
         Log out
       </Button>
     </Container>
-  );
+  )
 }
 
 export default DashboardScreen;
