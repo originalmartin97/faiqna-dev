@@ -4,10 +4,12 @@ import { TopBar } from '../components/TopBar'
 import { PersistentSideBar } from '../components/PersistentSideBar'
 import TemporarySideBar from '../components/TemporarySideBar'
 import Quizlet from '../components/Quizlet'
+import { SelectedDocumentContext } from '../contexts/SelectedDocumentContext';
 
 
 function DashboardScreen() {
   const sideBarWidth = `calc(100% - 240px)`
+  const [selectedDocumentId, setSelectedDocumentId] = useState(null);
   const [openSideBar, setOpenSideBar] = useState(false)
   const toggleSideBar = (event) => {
     event.stopPropagation()
@@ -29,13 +31,15 @@ function DashboardScreen() {
         overflow: 'auto',
       }}
     >
-      <TopBar sideBarWidth={sideBarWidth} toggleSideBar={toggleSideBar} />
-      <PersistentSideBar sideBarWidth={sideBarWidth} />
-      <TemporarySideBar open={openSideBar}
-        toggleSideBar={toggleSideBar}
-        sideBarWidth={sideBarWidth}
-        close={toggleSideBar} />
-      <Quizlet />
+      <SelectedDocumentContext.Provider value={{ selectedDocumentId, setSelectedDocumentId }}>
+        <TopBar sideBarWidth={sideBarWidth} toggleSideBar={toggleSideBar} />
+        <PersistentSideBar sideBarWidth={sideBarWidth} />
+        <TemporarySideBar open={openSideBar}
+          toggleSideBar={toggleSideBar}
+          sideBarWidth={sideBarWidth}
+          close={toggleSideBar} />
+        <Quizlet />
+      </SelectedDocumentContext.Provider>
     </Container>
   )
 }

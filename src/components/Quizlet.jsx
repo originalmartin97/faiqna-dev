@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react';
 import { Box, Card, Divider } from '@mui/material'
 import InputFile from './InputFile'
-import ShowLatestResponse from './ShowLatestResponse'
+import ShowResponse from './ShowResponse'
+import { SelectedDocumentContext } from '../contexts/SelectedDocumentContext';
 
 const Quizlet = () => {
+    const { selectedDocumentId } = useContext(SelectedDocumentContext);
     return (
         <Box
             sx={{
@@ -36,7 +38,7 @@ const Quizlet = () => {
                 /> {/* Add a black line */}
                 <br />
                 Shi' got super hot
-                <ShowLatestResponse />
+                <ShowResponse documentId={selectedDocumentId} />
             </Card>
         </Box >
     )

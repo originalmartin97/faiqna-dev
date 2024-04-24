@@ -1,10 +1,11 @@
-import React from 'react';
-import { useLatestResponses } from '../hooks/useLatestResponses';
-import { Typography } from '@mui/material';
+import { useLatestResponses } from '../hooks/useLatestResponses'
+import { Typography } from '@mui/material'
+import React from 'react'
+
 
 const ShowLatestResponse = () => {
-    const responses = useLatestResponses();
-    const response = responses[0];
+    const responses = useLatestResponses()
+    const response = responses[0]
 
     const responseLines = response && response.content ? (
         <Typography>
@@ -18,6 +19,6 @@ const ShowLatestResponse = () => {
     ) : null
 
     return responseLines
-};
+}
 
 export default ShowLatestResponse
