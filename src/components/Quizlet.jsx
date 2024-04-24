@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Card, Divider } from '@mui/material'
 import InputFile from './InputFile'
-import ShowResponse from './ShowResponse'
+import ShowLatestResponse from './ShowLatestResponse'
 
 const Quizlet = () => {
     return (
@@ -36,7 +36,7 @@ const Quizlet = () => {
                 /> {/* Add a black line */}
                 <br />
                 Shi' got super hot
-                <ShowResponse />
+                <ShowLatestResponse />
             </Card>
         </Box >
     )

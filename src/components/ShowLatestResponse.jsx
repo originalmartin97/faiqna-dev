@@ -1,12 +1,10 @@
-// ShowResponse.jsx
 import React from 'react';
-import { useLatestResponse } from '../hooks/useLatestResponse';
+import { useLatestResponses } from '../hooks/useLatestResponses';
 import { Typography } from '@mui/material';
-import { useParams } from 'react-router-dom';
 
-const ShowResponse = () => {
-    const { id } = useParams();
-    const response = useLatestResponse(id);
+const ShowLatestResponse = () => {
+    const responses = useLatestResponses();
+    const response = responses[0];
 
     const responseLines = response && response.content ? (
         <Typography>
@@ -22,4 +20,4 @@ const ShowResponse = () => {
     return responseLines
 };
 
-export default ShowResponse
+export default ShowLatestResponse
