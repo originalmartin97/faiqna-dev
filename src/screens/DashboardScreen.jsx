@@ -1,14 +1,13 @@
-import { Container, Button } from '@mui/material'
+import { Container } from '@mui/material'
 import { React, useState } from 'react'
-import { signOut } from 'firebase/auth'
-import { auth } from '../firebase'
 import { TopBar } from '../components/TopBar'
-import { SideBar } from '../components/PersistentSideBar'
+import { PersistentSideBar } from '../components/PersistentSideBar'
 import TemporarySideBar from '../components/TemporarySideBar'
+import Quizlet from '../components/Quizlet'
 
 
 function DashboardScreen() {
-  const sideBarWidth = 300
+  const sideBarWidth = `calc(100% - 240px)`
   const [openSideBar, setOpenSideBar] = useState(false)
   const toggleSideBar = (event) => {
     event.stopPropagation()
@@ -19,10 +18,24 @@ function DashboardScreen() {
     setOpenSideBar(false)
   }
   return (
-    <Container>
+    <Container
+      sx={{
+        marginTop: '80px',
+        paddingTop: '.5rem',
+        paddingBottom: '.5rem',
+        height: 'calc(100vh - 80px)',
+        maxHeight: '900px',
+        maxWidth: '1200px',
+        overflow: 'auto',
+      }}
+    >
       <TopBar sideBarWidth={sideBarWidth} toggleSideBar={toggleSideBar} />
-      <SideBar sideBarWidth={sideBarWidth} />
-      <TemporarySideBar open={openSideBar} toggleSideBar={toggleSideBar} sideBarWidth={sideBarWidth} close={toggleSideBar} />
+      <PersistentSideBar sideBarWidth={sideBarWidth} />
+      <TemporarySideBar open={openSideBar}
+        toggleSideBar={toggleSideBar}
+        sideBarWidth={sideBarWidth}
+        close={toggleSideBar} />
+      <Quizlet />
     </Container>
   )
 }

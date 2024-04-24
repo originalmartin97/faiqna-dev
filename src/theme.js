@@ -59,6 +59,9 @@ export const theme = createTheme({
         root: {
           ...flexCenterColumn,
           height: "100vh",
+          overflow: "auto",
+          minHeight: "200px",
+          minWidth: "100px",
         },
       },
     },
@@ -67,6 +70,9 @@ export const theme = createTheme({
         root: {
           ...flexCenterColumn,
           margin: "2rem",
+          overflow: "auto",
+          minHeight: "200px",
+          minWidth: "100px",
         },
       },
     },
@@ -110,6 +116,9 @@ export const theme = createTheme({
       styleOverrides: {
         paper: {
           backgroundColor: "#e1f6ea",
+          minWidth: "200px",
+          minHeight: "100px",
+          overflow: "auto",
         },
       },
     },
