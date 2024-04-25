@@ -5,9 +5,12 @@ import { PersistentSideBar } from '../components/PersistentSideBar'
 import TemporarySideBar from '../components/TemporarySideBar'
 import Quizlet from '../components/Quizlet'
 import { SelectedDocumentContext } from '../contexts/SelectedDocumentContext';
+import { useLatestResponses } from '../hooks/useLatestResponses';
 
 
 function DashboardScreen() {
+  const responses = useLatestResponses();
+
   const sideBarWidth = `calc(100% - 240px)`
   const [selectedDocumentId, setSelectedDocumentId] = useState(null);
   const [openSideBar, setOpenSideBar] = useState(false)
@@ -33,12 +36,12 @@ function DashboardScreen() {
     >
       <SelectedDocumentContext.Provider value={{ selectedDocumentId, setSelectedDocumentId }}>
         <TopBar sideBarWidth={sideBarWidth} toggleSideBar={toggleSideBar} />
-        <PersistentSideBar sideBarWidth={sideBarWidth} />
-        <TemporarySideBar open={openSideBar}
+        <PersistentSideBar responses={responses} sideBarWidth={sideBarWidth} />
+        <TemporarySideBar responses={responses} open={openSideBar}
           toggleSideBar={toggleSideBar}
           sideBarWidth={sideBarWidth}
           close={toggleSideBar} />
-        <Quizlet />
+        <Quizlet responses={responses} />
       </SelectedDocumentContext.Provider>
     </Container>
   )

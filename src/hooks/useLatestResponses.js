@@ -7,23 +7,31 @@ const db = getFirestore(app)
 
 export const useLatestResponses = () => {
     const [latestResponses, setLatestResponses] = useState([])
+    const { areResponsesFetched, setAreResponsesFetched } = useStore()
 
 
     useEffect(() => {
-        const documentQuery = query(collection(db, 'files'), orderBy('uploaded_at', 'desc'))
+        if (!areResponsesFetched) {
+            const documentQuery = query(collection(db, 'files'), orderBy('uploaded_at', 'desc'))
 
-        const unsubscribe = onSnapshot(documentQuery, (snapshot) => {
-            const newResponses = snapshot.docs.map(doc => ({
-                id: doc.id,
-                title: doc.data().parentMessageId,
-                content: doc.data().response
-            }))
-            setLatestResponses(newResponses)
+            const unsubscribe = onSnapshot(documentQuery, (snapshot) => {
+                try {
+                    const newResponses = snapshot.docs.map(doc => ({
+                        id: doc.id,
+                        title: doc.data().parentMessageId,
+                        content: doc.data().response
+                    }))
+                    setLatestResponses(newResponses)
+                    setAreResponsesFetched(true)
+                    console.log(newResponses)
+                } catch (error) {
+                    console.error("Error processing snapshot: ", error);
+                }
+            })
 
-        })
-
-        // Cleanup function to unsubscribe from the listener when the component unmounts
-        return () => unsubscribe();
+            // Cleanup function to unsubscribe from the listener when the component unmounts
+            return () => unsubscribe();
+        }
     }, []) // Dependency array is empty as there are no dependencies
 
     return latestResponses

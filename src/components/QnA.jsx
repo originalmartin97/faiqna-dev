@@ -16,15 +16,22 @@ const QnA = ({ lines }) => {
         answer2: defaultColor,
         answer3: defaultColor,
     });
-    console.log(lines)
     const tasks = lines || [];
 
+    useEffect(() => {
+        setColors({
+            answer1: defaultColor,
+            answer2: defaultColor,
+            answer3: defaultColor,
+        });
+        setCurrentTaskIndex(0);
+    }, [lines]);
 
     const handleClick = () => {
         setColors({
-            answer1: tasks[currentTaskIndex].answer1[tasks[currentTaskIndex].answer1.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
-            answer2: tasks[currentTaskIndex].answer2[tasks[currentTaskIndex].answer2.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
-            answer3: tasks[currentTaskIndex].answer3[tasks[currentTaskIndex].answer3.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
+            answer1: tasks[currentTaskIndex]?.answer1?.[tasks[currentTaskIndex]?.answer1?.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
+            answer2: tasks[currentTaskIndex]?.answer2?.[tasks[currentTaskIndex]?.answer2?.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
+            answer3: tasks[currentTaskIndex]?.answer3?.[tasks[currentTaskIndex]?.answer3?.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
         });
         setClicked(true);
     }
@@ -46,9 +53,9 @@ const QnA = ({ lines }) => {
         if (currentTaskIndex > 0) {
             setIsLoading(true);
             setColors({
-                answer1: tasks[currentTaskIndex].answer1[tasks[currentTaskIndex].answer1.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
-                answer2: tasks[currentTaskIndex].answer2[tasks[currentTaskIndex].answer2.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
-                answer3: tasks[currentTaskIndex].answer3[tasks[currentTaskIndex].answer3.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
+                answer1: tasks[currentTaskIndex]?.answer1?.[tasks[currentTaskIndex]?.answer1?.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
+                answer2: tasks[currentTaskIndex]?.answer2?.[tasks[currentTaskIndex]?.answer2?.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
+                answer3: tasks[currentTaskIndex]?.answer3?.[tasks[currentTaskIndex]?.answer3?.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
             });
             setCurrentTaskIndex(currentTaskIndex - 1);
             setIsLoading(false);
@@ -68,9 +75,10 @@ const QnA = ({ lines }) => {
         return <LinearProgress color="success" />
     }
 
+
     return (
         <Box>
-            {tasks.length > 0 && (
+            {tasks && tasks[currentTaskIndex] && (
                 <>
                     <Typography variant="h4">
                         {tasks[currentTaskIndex].question}

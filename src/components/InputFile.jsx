@@ -7,9 +7,12 @@ import { Button, Box, Typography } from '@mui/material';
 import useStore from '../store';
 
 function InputFile() {
+  const fileInputRef = useRef()
+
+  const { setAreResponsesFetched } = useStore()
   const [fileUpload, setFileUpload] = useState(null)
   const [selectedFileName, setSelectedFileName] = useState('') // Add state variable for selected file name
-  const fileInputRef = useRef()
+
   const { setIsFileUploaded } = useStore()
 
   // Function to upload file
@@ -19,6 +22,7 @@ function InputFile() {
     uploadBytes(fileRef, fileUpload).then(() => {
       alert('File uploaded');
       setIsFileUploaded(true);
+      setAreResponsesFetched(false);
     });
 
   };

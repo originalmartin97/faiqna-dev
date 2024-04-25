@@ -6,10 +6,12 @@ const store = (set) => ({
     isLoading: false,
     isFileUploaded: false,
     isRightAnswer: false,
+    areResponsesFetched: false,
     setLoginStatus: (status) => set({ isLoggedIn: status, isLoading: false }, false, "setLoginStatus"),
     setIsFileUploaded: (status) => set({ isFileUploaded: status }, false, "setIsFileUploaded"),
     setIsRightAnswer: (status) => set({ isRightAnswer: status }, false, "setIsRightAnswer"),
     setIsLoading: (status) => set({ isLoading: status }, false, "setIsLoading"),
+    setAreResponsesFetched: (status) => set({ areResponsesFetched: status }, false, "setAreResponsesFetched"),
 })
 
 const useStore = create(devtools(store))

@@ -5,8 +5,8 @@ import { useLatestResponses } from '../hooks/useLatestResponses';
 import { SelectedDocumentContext } from '../contexts/SelectedDocumentContext';
 import useStore from '../store';
 
-const ResponseHistory = () => {
-    const responses = useLatestResponses();
+const ResponseHistory = ({responses}) => {
+
     const { setSelectedDocumentId } = useContext(SelectedDocumentContext);
     const { setIsFileUploaded } = useStore()
 
