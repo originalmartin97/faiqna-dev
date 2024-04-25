@@ -4,7 +4,9 @@ import { devtools } from 'zustand/middleware'
 const store = (set) => ({
     isLoggedIn: false,
     loading: true,
-    setLoginStatus: (status) => set({ isLoggedIn: status, loading: false}, false, "setLoginStatus"),
+    isFileUploaded: false,
+    setLoginStatus: (status) => set({ isLoggedIn: status, loading: false }, false, "setLoginStatus"),
+    setIsFileUploaded: (status) => set({ isFileUploaded: status }, false, "setIsFileUploaded"),
 })
 
 const useStore = create(devtools(store))

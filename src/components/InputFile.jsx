@@ -1,27 +1,34 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { storage } from '../firebase';
 import { ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
 import { Button, Box, Typography } from '@mui/material';
+import useStore from '../store';
 
 function InputFile() {
-  const [fileUpload, setFileUpload] = useState(null);
-  const [selectedFileName, setSelectedFileName] = useState(''); // Add state variable for selected file name
-  const fileInputRef = useRef();
+  const [fileUpload, setFileUpload] = useState(null)
+  const [selectedFileName, setSelectedFileName] = useState('') // Add state variable for selected file name
+  const fileInputRef = useRef()
+  const { setIsFileUploaded } = useStore()
 
+  // Function to upload file
   const uploadFile = () => {
     if (fileUpload == null) return;
     const fileRef = ref(storage, `files/${fileUpload.name + v4()}`);
     uploadBytes(fileRef, fileUpload).then(() => {
       alert('File uploaded');
+      setIsFileUploaded(true);
     });
+
   };
 
+  // Function to open file dialog
   const handleFileSelect = () => {
     fileInputRef.current.click();
   };
 
+  // Function to handle file change
   const handleFileChange = (event) => {
     setFileUpload(event.target.files[0]);
     setSelectedFileName(event.target.files[0].name); // Update selected file name

@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { getFirestore, collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { app } from '../firebase'
+import useStore from '../store'
 
 const db = getFirestore(app)
 
 export const useLatestResponses = () => {
     const [latestResponses, setLatestResponses] = useState([])
+
 
     useEffect(() => {
         const documentQuery = query(collection(db, 'files'), orderBy('uploaded_at', 'desc'))
@@ -17,6 +19,7 @@ export const useLatestResponses = () => {
                 content: doc.data().response
             }))
             setLatestResponses(newResponses)
+
         })
 
         // Cleanup function to unsubscribe from the listener when the component unmounts

@@ -17,7 +17,7 @@ const gcs = new Storage();
 exports.processFile = functions.storage.object().onFinalize(async (object) => {
   const filePath = object.name; // File path in the bucket.
   console.log(`Processing file: ${filePath}`);
-  
+
   const bucket = gcs.bucket(object.bucket);
   const tempFilePath = path.join(os.tmpdir(), path.basename(filePath));
   const metadata = {
@@ -25,19 +25,25 @@ exports.processFile = functions.storage.object().onFinalize(async (object) => {
   };
 
   // Download file from bucket.
-  await bucket.file(filePath).download({destination: tempFilePath});
+  await bucket.file(filePath).download({ destination: tempFilePath });
   console.log(`File downloaded to: ${tempFilePath}`);
-  
+
   let prompt;
 
-  const parameters = 'Create 3 to 10 questions in a section called "Questions" and 3 possible "Answers" for those ' +
-  'questions but with only one being exactly correct by the given text for this text given below:\n\n'
+  const parametersStart =
 
-  const command = '\n\nIn your response: firstly show only the questions generated; use only the language based on the given text beforehand; ' +
-  'for the answers, flag the only correct ones from the possibilities with adding a "*" right after them; The "Questions" and "Answers" sections must be separated from each other; ' +
-  'The generated answers for the questions must be indicated matching their pairing questions like this:\n' +
-  '"1/1 first possible answer for the first question\n' +
-  '1/2 second possible answer for the first question"\n and iterating so on...'
+    'Interpret the given text below. Create exactly 1 question and exactly 3 possible answers for that question but with only one being exactly correct by the given text below.' +
+    ' Put a * after the exactly correct answer! Do not use any number, letter, emphasis, or anything like that in generating the question and answers.' +
+    ' Use only the following format style and structure in your answer:\n' +
+    '(the generated question)\n' +
+    '(the first possible answer)\n' +
+    '(the second possible answer)\n' +
+    '(the third possible answer)\n' +
+    'Please ensure the response follows this exact format without any deviation.\n' +
+    'The given text:\n"'
+
+  const parametersEnd =
+    '"'
 
   const fileExtension = path.extname(filePath);
   if (fileExtension === '.docx') {
@@ -56,7 +62,7 @@ exports.processFile = functions.storage.object().onFinalize(async (object) => {
     const buffer = fs.readFileSync(tempFilePath);
     const detected = jschardet.detect(buffer);
     prompt = iconv.decode(buffer, detected.encoding);
-    prompt = `${parameters}${prompt}${command}`;
+    prompt = `${parametersStart}${prompt}${parametersEnd}`;
   }
 
   console.log(`Extracted prompt: ${prompt.substring(0, 100)}...`); // Log the first 100 characters
