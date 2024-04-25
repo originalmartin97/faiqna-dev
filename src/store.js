@@ -3,10 +3,13 @@ import { devtools } from 'zustand/middleware'
 
 const store = (set) => ({
     isLoggedIn: false,
-    loading: true,
+    isLoading: false,
     isFileUploaded: false,
-    setLoginStatus: (status) => set({ isLoggedIn: status, loading: false }, false, "setLoginStatus"),
+    isRightAnswer: false,
+    setLoginStatus: (status) => set({ isLoggedIn: status, isLoading: false }, false, "setLoginStatus"),
     setIsFileUploaded: (status) => set({ isFileUploaded: status }, false, "setIsFileUploaded"),
+    setIsRightAnswer: (status) => set({ isRightAnswer: status }, false, "setIsRightAnswer"),
+    setIsLoading: (status) => set({ isLoading: status }, false, "setIsLoading"),
 })
 
 const useStore = create(devtools(store))

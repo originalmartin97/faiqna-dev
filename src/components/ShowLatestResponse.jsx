@@ -15,7 +15,7 @@ const ShowLatestResponse = () => {
     const responseLines = response.content
     const task = Parser(responseLines)
     console.log(task)
-    const qna = <QnA task={task}></QnA>;
+    const qna = <QnA lines={task}></QnA>;
 
     return qna;
 };

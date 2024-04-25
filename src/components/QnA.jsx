@@ -1,25 +1,106 @@
-import { Box, Button, Card, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Box, Button, Card, LinearProgress, Typography } from '@mui/material'
+import useStore from '../store'
 
-const QnA = ({ task }) => {
+const QnA = ({ lines }) => {
+    const defaultColor = '#2D6A51';
 
-    console.log(task.answer1);
+    const { isLoading, setIsLoading } = useStore();
+
+    const [clicked, setClicked] = useState(false);
+    const [shouldUpdateIndex, setShouldUpdateIndex] = useState(false);
+    const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
+
+    const [colors, setColors] = useState({
+        answer1: defaultColor,
+        answer2: defaultColor,
+        answer3: defaultColor,
+    });
+    console.log(lines)
+    const tasks = lines || [];
+
+
+    const handleClick = () => {
+        setColors({
+            answer1: tasks[currentTaskIndex].answer1[tasks[currentTaskIndex].answer1.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
+            answer2: tasks[currentTaskIndex].answer2[tasks[currentTaskIndex].answer2.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
+            answer3: tasks[currentTaskIndex].answer3[tasks[currentTaskIndex].answer3.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
+        });
+        setClicked(true);
+    }
+
+    const handleNext = () => {
+        if (currentTaskIndex < tasks.length - 1) {
+            setIsLoading(true);
+            setColors({
+                answer1: defaultColor,
+                answer2: defaultColor,
+                answer3: defaultColor,
+            })
+            setShouldUpdateIndex(true);
+            setClicked(false);
+        }
+    }
+
+    const handlePrevious = () => {
+        if (currentTaskIndex > 0) {
+            setIsLoading(true);
+            setColors({
+                answer1: tasks[currentTaskIndex].answer1[tasks[currentTaskIndex].answer1.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
+                answer2: tasks[currentTaskIndex].answer2[tasks[currentTaskIndex].answer2.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
+                answer3: tasks[currentTaskIndex].answer3[tasks[currentTaskIndex].answer3.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
+            });
+            setCurrentTaskIndex(currentTaskIndex - 1);
+            setIsLoading(false);
+            setClicked(true);
+        }
+    }
+
+    useEffect(() => {
+        if (shouldUpdateIndex) {
+            setCurrentTaskIndex(currentTaskIndex + 1);
+            setShouldUpdateIndex(false);
+            setIsLoading(false);
+        }
+    }, [colors]);
+
+    if (isLoading) {
+        return <LinearProgress color="success" />
+    }
+
     return (
         <Box>
-            <Typography variant="h4">
-                {task.question}
-            </Typography>
-            <Card variant="h6">
-                <Button>
-                    {task.answer1}
-                </Button>
-                <Button>
-                    {task.answer2}
-                </Button>
-                <Button>
-                    {task.answer3}
-                </Button>
-            </Card>
+            {tasks.length > 0 && (
+                <>
+                    <Typography variant="h4">
+                        {tasks[currentTaskIndex].question}
+                    </Typography>
+                    <Card variant="h6">
+                        <Button onClick={handleClick} style={{ backgroundColor: colors.answer1 }}>
+                            {tasks[currentTaskIndex].answer1}
+                        </Button>
+                        <Button onClick={handleClick} style={{ backgroundColor: colors.answer2 }}>
+                            {tasks[currentTaskIndex].answer2}
+                        </Button>
+                        <Button onClick={handleClick} style={{ backgroundColor: colors.answer3 }}>
+                            {tasks[currentTaskIndex].answer3}
+                        </Button>
+                    </Card>
+                    <Box>
+
+                    </Box>
+                    {clicked &&
+                        <>
+                            {currentTaskIndex > 0 &&
+                                <Button onClick={handlePrevious}>
+                                    Previous
+                                </Button>}
+                            {currentTaskIndex < tasks.length - 1 && <Button onClick={handleNext}>
+                                Next
+                            </Button>}
+                        </>}
+                </>
+            )}
         </Box>
     )
 }

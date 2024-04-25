@@ -32,8 +32,8 @@ exports.processFile = functions.storage.object().onFinalize(async (object) => {
 
   const parametersStart =
 
-    'Interpret the given text below. Create exactly 1 question and exactly 3 possible answers for that question but with only one being exactly correct by the given text below.' +
-    ' Put a * after the exactly correct answer! Do not use any number, letter, emphasis, or anything like that in generating the question and answers.' +
+    'Generate 3 to 10 questions, each with exactly 3 possible answers, one of which is correct based on the given text below. Put a * after the exactly correct answer!' +
+    ' Do not use any number, letter, emphasis, or anything like that in generating the question and answers.' +
     ' Use only the following format style and structure in your answer:\n' +
     '(the generated question)\n' +
     '(the first possible answer)\n' +
