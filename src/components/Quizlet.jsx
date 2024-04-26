@@ -6,7 +6,7 @@ import useStore from '../store';
 import { Parser } from '../utils/Parser';
 import QnA from './QnA';
 
-const Quizlet = ({ responses }) => {
+const Quizlet = ({ responses, sideBarWidth }) => {
     const { selectedDocumentId } = useContext(SelectedDocumentContext);
     const { isFileUploaded } = useStore()
 
@@ -29,23 +29,19 @@ const Quizlet = ({ responses }) => {
                 display: 'flex', // Use flexbox for layout
                 justifyContent: 'center', // Center horizontally
                 alignItems: 'flex-start', // Start from the top vertically
-                width: '100%', // Take up a little bit less space than the container width
-                height: '100%', // Take up all the height
                 overflow: 'auto', // Add a scrollbar when needed
                 padding: ".5rem",
                 minHeight: "300px",
                 minWidth: "200px",
+                margin: "1rem",
             }}
         >
             <Card
                 sx={{
-                    width: '100%', // Take up all the width
-                    height: "100%", // Take up all the height
                     paddingLeft: "1rem",
                     paddingRight: "1rem",
                     paddingBottom: "1rem",
-                    minWidth: "200px",
-                    minHeight: "300px",
+                    margin: "1rem",
                     overflow: 'auto', // Add a scrollbar when needed
 
                 }}

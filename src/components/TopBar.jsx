@@ -14,7 +14,7 @@ export const TopBar = ({ sideBarWidth, toggleSideBar }) => {
     <Box sx={{
       flexGrow: 1,
       position: 'absolute',
-      width: { lg: `calc(100% - ${sideBarWidth})` },
+      width: { lg: `calc(100% - ${sideBarWidth}px)` },
       alignItems: 'flex-start'
     }}>
       <AppBar position="fixed" sx={{ backgroundColor: "#2f312F", }}>
@@ -38,7 +38,7 @@ export const TopBar = ({ sideBarWidth, toggleSideBar }) => {
               sx={{ mt: '.5rem' }}
             />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, margin: 2, display: { md: "flex" } }}>
             FAIQnA
           </Typography>
           <Button sx={{

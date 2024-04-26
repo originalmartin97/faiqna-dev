@@ -6,10 +6,17 @@ import ResponseHistory from './ResponseHistory';
 
 export const PersistentSideBar = ({ sideBarWidth, responses }) => {
     return (
-        <Drawer variant="permanent" anchor="left" sx={{ display: { xs: 'none', lg: 'block' } }}>
-            <Box width={sideBarWidth} textAlign="left" role="presentation">
-                <ResponseHistory responses={responses} />
-            </Box>
-        </Drawer>
+        <Box
+            sx={{
+                width: { lg: sideBarWidth },
+                flexShrink: { lg: 0 },
+            }}
+        >
+            <Drawer variant="permanent" anchor="left" sx={{ display: { xs: 'none', sm: 'none', md: 'none', lg: 'block' } }}>
+                <Box width={sideBarWidth} textAlign="left" role="presentation">
+                    <ResponseHistory responses={responses} />
+                </Box>
+            </Drawer>
+        </Box>
     )
 }

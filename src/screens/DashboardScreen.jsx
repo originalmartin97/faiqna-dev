@@ -1,4 +1,4 @@
-import { Container } from '@mui/material'
+import { Container, Box } from '@mui/material'
 import { React, useState } from 'react'
 import { TopBar } from '../components/TopBar'
 import { PersistentSideBar } from '../components/PersistentSideBar'
@@ -11,7 +11,7 @@ import { useLatestResponses } from '../hooks/useLatestResponses';
 function DashboardScreen() {
   const responses = useLatestResponses();
 
-  const sideBarWidth = `calc(100% - 240px)`
+  const sideBarWidth = 250
   const [selectedDocumentId, setSelectedDocumentId] = useState(null);
   const [openSideBar, setOpenSideBar] = useState(false)
   const toggleSideBar = (event) => {
@@ -25,12 +25,7 @@ function DashboardScreen() {
   return (
     <Container
       sx={{
-        marginTop: '80px',
-        paddingTop: '.5rem',
-        paddingBottom: '.5rem',
-        height: 'calc(100vh - 80px)',
-        maxHeight: '900px',
-        maxWidth: '1200px',
+        display: 'flex',
         overflow: 'auto',
       }}
     >
@@ -41,9 +36,19 @@ function DashboardScreen() {
           toggleSideBar={toggleSideBar}
           sideBarWidth={sideBarWidth}
           close={toggleSideBar} />
-        <Quizlet responses={responses} />
+        <Box
+          component="main"
+          sx={{
+            flexgrow: 1,
+            p: 3,
+            position: 'relative',
+            width: `calc(100% - ${sideBarWidth}px)`,
+          }}
+        >
+          <Quizlet sideBarWidth={sideBarWidth} responses={responses} />
+        </Box>
       </SelectedDocumentContext.Provider>
-    </Container>
+    </Container >
   )
 }
 
