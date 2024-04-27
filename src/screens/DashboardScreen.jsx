@@ -26,25 +26,41 @@ function DashboardScreen() {
     <Container
       sx={{
         display: 'flex',
-        overflow: 'auto',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        pt: {
+          xs: '64px',
+          sm: '64px',
+          md: '64px',
+          lg: '64px',
+          xl: '64px',
+        }
       }}
     >
       <SelectedDocumentContext.Provider value={{ selectedDocumentId, setSelectedDocumentId }}>
-        <TopBar sideBarWidth={sideBarWidth} toggleSideBar={toggleSideBar} />
-        <PersistentSideBar responses={responses} sideBarWidth={sideBarWidth} />
-        <TemporarySideBar responses={responses} open={openSideBar}
-          toggleSideBar={toggleSideBar}
-          sideBarWidth={sideBarWidth}
-          close={toggleSideBar} />
         <Box
-          component="main"
           sx={{
-            flexgrow: 1,
-            p: 3,
-            position: 'relative',
-            width: `calc(100% - ${sideBarWidth}px)`,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: '100%',
+            pt: {
+              xs: '64px',
+              sm: '64px',
+              md: '64px',
+              lg: '64px',
+              xl: '64px',
+            }
           }}
         >
+          <TopBar sideBarWidth={sideBarWidth} toggleSideBar={toggleSideBar} />
+          <PersistentSideBar responses={responses} sideBarWidth={sideBarWidth} />
+          <TemporarySideBar responses={responses} open={openSideBar}
+            toggleSideBar={toggleSideBar}
+            sideBarWidth={sideBarWidth}
+            close={toggleSideBar} />
           <Quizlet sideBarWidth={sideBarWidth} responses={responses} />
         </Box>
       </SelectedDocumentContext.Provider>

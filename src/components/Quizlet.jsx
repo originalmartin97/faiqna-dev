@@ -24,35 +24,13 @@ const Quizlet = ({ responses, sideBarWidth }) => {
     const response = useMemo(handleResponse, [responses, selectedDocumentId, isFileUploaded]);
 
     return (
-        <Box
-            sx={{
-                display: 'flex', // Use flexbox for layout
-                justifyContent: 'center', // Center horizontally
-                alignItems: 'flex-start', // Start from the top vertically
-                overflow: 'auto', // Add a scrollbar when needed
-                padding: ".5rem",
-                minHeight: "300px",
-                minWidth: "200px",
-                margin: "1rem",
-            }}
-        >
-            <Card
-                sx={{
-                    paddingLeft: "1rem",
-                    paddingRight: "1rem",
-                    paddingBottom: "1rem",
-                    margin: "1rem",
-                    overflow: 'auto', // Add a scrollbar when needed
-
-                }}
-            >
-                <InputFile />
-                <Divider
-                /> {/* Add a black line */}
-                <br />
-                {response && response[0] && response[0].answer1 ? <QnA lines={response}></QnA> : "No questions available"}
-            </Card>
-        </Box >
+        <Card>
+            <InputFile />
+            <Divider
+            /> {/* Add a black line */}
+            <br />
+            {response && response[0] && response[0].answer1 ? <QnA lines={response}></QnA> : "No questions available"}
+        </Card>
     )
 }
 

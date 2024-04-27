@@ -11,44 +11,33 @@ import { auth } from '../firebase'
 
 export const TopBar = ({ sideBarWidth, toggleSideBar }) => {
   return (
-    <Box sx={{
-      flexGrow: 1,
-      position: 'absolute',
-      width: { lg: `calc(100% - ${sideBarWidth}px)` },
-      alignItems: 'flex-start'
+    <AppBar position="fixed" sx={{
+      backgroundColor: "#2f312F",
     }}>
-      <AppBar position="fixed" sx={{ backgroundColor: "#2f312F", }}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{
-              display: { xs: 'block', lg: 'none' },
-              "&:hover": { backgroundColor: "#a1f5ce", color: "black" },
-              pt: "0",
-              pb: "0",
-              pr: "8.5px",
-              pl: "8.5px"
-            }}
-            onClick={toggleSideBar}
-          >
-            <MenuIcon
-              sx={{ mt: '.5rem' }}
-            />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, margin: 2, display: { md: "flex" } }}>
-            FAIQnA
-          </Typography>
-          <Button sx={{
-            backgroundColor: "#a1f5ce", color: "black", padding: ".8rem",
-            "&:hover": { backgroundColor: "#c57d83" }
-          }} onClick={(event) => { event.stopPropagation(); signOut(auth) }}>
-            Log out
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </Box >
+      <Toolbar
+        sx={{
+          ml: { xs: 0, sm: 0, md: 0, lg: `${sideBarWidth}px`, xl: `${sideBarWidth}px` },
+        }}
+      >
+        <IconButton
+          sx={{
+            color: "#f7faf7",
+            "&:hover": { backgroundColor: "#a1f5ce", color: "black" },
+          }}
+          onClick={toggleSideBar}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" color='#f7faf7'>
+          FAIQnA
+        </Typography>
+        <Button sx={{
+          backgroundColor: "#a1f5ce", color: "black",
+          "&:hover": { backgroundColor: "#c57d83" }
+        }} onClick={(event) => { event.stopPropagation(); signOut(auth) }}>
+          Log out
+        </Button>
+      </Toolbar>
+    </AppBar>
   )
 }

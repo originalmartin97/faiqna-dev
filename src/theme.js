@@ -17,13 +17,14 @@ const flexCenterRow = {
 export const theme = createTheme({
   typography: {
     fontFamily: "'Nunito', sans-serif",
+    color: '#F7FAF7'
   },
   palette: {
     primary: {
       main: "#2D6A51",
     },
     secondary: {
-      main: "#99BDB1",
+      main: "#F7FAF7",
     },
     background: {
       default: "#F7FAF7"
@@ -44,32 +45,12 @@ export const theme = createTheme({
       },
       styleOverrides: {
         root: {
-          padding: "1.3rem",
           margin: ".8rem",
           borderRadius: "2rem",
           color: "#F7FAF7",
           fontWeight: "bold",
           textTransform: "none",
           boxShadow: `2px 2.5px 4px 1.5px rgba(0, 0, 0, .25)`,
-        },
-      },
-    },
-    MuiContainer: {
-      styleOverrides: {
-        root: {
-          ...flexCenterColumn,
-          height: "100vh",
-          overflow: "auto",
-        },
-      },
-    },
-    MuiBox: {
-      styleOverrides: {
-        root: {
-          ...flexCenterColumn,
-          margin: "2rem",
-          overflow: "auto",
-          minHeight: "200px",
         },
       },
     },
@@ -89,15 +70,6 @@ export const theme = createTheme({
         h3: {
           fontSize: "1.17rem",
           fontWeight: "bold",
-        },
-      },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          ...flexCenterRow,
-          margin: ".7rem",
-
         },
       },
     },
