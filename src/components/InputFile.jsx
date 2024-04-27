@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useState } from 'react';
 import { storage } from '../firebase';
 import { ref, uploadBytes } from 'firebase/storage';
@@ -48,7 +48,7 @@ function InputFile() {
         overflow: 'auto', // Add a scrollbar when needed
       }}
     >
-      {!fileUpload && <Typography variant="h6"> Upload a text based file</Typography>}
+      {!fileUpload && <Typography variant="h6"> Upload a new text based file</Typography>}
       <input
         type='file'
         ref={fileInputRef}

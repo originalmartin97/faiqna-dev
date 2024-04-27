@@ -125,23 +125,25 @@ const QnA = ({ lines, appBarHeight }) => {
             <Grid item>
                 {tasks && tasks[currentTaskIndex] && (
                     <Typography variant="h4"
-                        align="center"
+                        align="justify"
                         style={{
-                            textAlignLast: 'justify',
+                            textAlignLast: 'center',
                             fontWeight: 'bold'
                         }}
                         sx={{
-                            padding: '1rem',
+                            padding: 0,
                         }}>
                         {tasks[currentTaskIndex].question}
                     </Typography>
                 )}
             </Grid>
-            <Grid item>
+            <Grid container justifyContent="center">
                 {tasks && tasks[currentTaskIndex] && (
                     <Card variant="h6"
+                        justifyContent="center"
                         sx={{
                             padding: 0,
+                            justifyContent: "center"
                         }}
                     >
                         <Button
@@ -192,19 +194,32 @@ const QnA = ({ lines, appBarHeight }) => {
             <Grid item container justifyContent="space-between">
                 <>
                     <Grid item>
-                        <Button disabled={currentTaskIndex === 0} onClick={handlePrevious}>
+                        <Button disabled={currentTaskIndex === 0} onClick={handlePrevious}
+                            sx={{
+                                width: "100px"
+                            }}>
                             Previous
                         </Button>
                     </Grid>
                     <Grid item>
-                        <Button disabled={currentTaskIndex >= tasks.length - 1} onClick={handleNext}>
+                        <Button disabled={currentTaskIndex >= tasks.length - 1} onClick={handleNext}
+                            sx={{
+                                width: "100px"
+                            }}>
                             Next
                         </Button>
                     </Grid>
                 </>
             </Grid>
             <Grid item container justifyContent="center" alignItems="flex-end" style={{ flexGrow: 1 }}>
-                <Button onClick={handleReset}>
+                <Button
+                    onClick={handleReset}
+                    sx={{
+                        backgroundColor: "#99bdb1",
+                        color: "black",
+                        "&:hover": { backgroundColor: "#c57d83" },
+                        padding: "1rem",
+                    }}>
                     Reset
                 </Button>
             </Grid>
