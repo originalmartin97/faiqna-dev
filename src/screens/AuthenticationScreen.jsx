@@ -32,67 +32,113 @@ const AuthenticationScreen = () => {
 
 
     return (
-        <Container>
-            <Box>
-                <Typography
-                    variant="h1"
+        <>
+            <Container>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        margin: '2rem',
+                    }}
                 >
-                    Welcome to FAIQnA!
-                </Typography>
-            </Box>
-            <Card>
-                <Box margin="1.8rem">
-                    <TextField
-                        name="email"
-                        required
-                        id="standard-email-input"
-                        label="Email"
-                        type="email"
-                        variant='standard'
-                        value={form.email}
-                        onChange={handleChange}
-                    />
-                    <TextField
-                        name="password"
-                        required
-                        id="outlined-password-input"
-                        label="Password"
-                        type="password"
-                        variant='standard'
-                        autoComplete="current-password"
-                        value={form.password}
-                        onChange={handleChange}
-                    />
-                    <Box
-                        display="flex"
-                        justifyContent="center"
-                    >
-                        <Button
-                            disabled={loading || !form.email.trim() || !form.password.trim()}
-                            onClick={handleAuth}
-                        >
-                            Sign in
-                        </Button>
-                    </Box>
                     <Typography
-                        variant="h3"
-                        textAlign="center"
+                        variant="h1"
+                        align="center"
+                        style={{
+                            textDecoration: 'underline',
+                            whiteSpace: 'normal',
+                            wordWrap: 'break-word',
+                            textAlignLast: 'center',
+                        }}
                     >
-                        OR
+                        Welcome to FAIQnA!
+                    </Typography>
+                </Box >
+            </Container>
+            <Container
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100%',
+                    mt: '3rem',
+                }}
+            >
+                <Card>
+                    <Typography variant="h6" align="center">
+                        Sign in
                     </Typography>
                     <Box
-                        display="flex"
-                        justifyContent="center"
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            padding: '1rem',
+                        }}
                     >
-                        <Button
-                            onClick={handleSignInWithGoogle}
+                        <TextField
+                            name="email"
+                            required
+                            id="standard-email-input"
+                            label="Email"
+                            type="email"
+                            variant='standard'
+                            value={form.email}
+                            onChange={handleChange}
+                            sx={{
+                                mb: '1rem',
+                            }}
+                        />
+                        <TextField
+                            name="password"
+                            required
+                            id="outlined-password-input"
+                            label="Password"
+                            type="password"
+                            variant='standard'
+                            autoComplete="current-password"
+                            value={form.password}
+                            onChange={handleChange}
+                        />
+                        <Box
+                            display="flex"
+                            justifyContent="center"
+                            marginTop="1rem"
                         >
-                            Sign in with Google
-                        </Button>
+                            <Button
+                                disabled={loading || !form.email.trim() || !form.password.trim()}
+                                onClick={handleAuth}
+                                sx={{
+                                    backgroundColor: "#99bdb1",
+                                    color: "black",
+                                    "&:hover": { backgroundColor: "#2d6a51", color: "#f7faf7" },
+                                    padding: "1rem",
+                                }}
+                            >
+                                Sign in
+                            </Button>
+                        </Box>
+                        <Typography
+                            variant="h3"
+                            textAlign="center"
+                            margin="1rem"
+                        >
+                            OR
+                        </Typography>
+                        <Box
+                            display="flex"
+                            justifyContent="center"
+                        >
+                            <Button
+                                onClick={handleSignInWithGoogle}
+                            >
+                                Sign in with Google
+                            </Button>
+                        </Box>
                     </Box>
-                </Box>
-            </Card>
-        </Container >
+                </Card>
+            </Container>
+        </>
     )
 }
 
