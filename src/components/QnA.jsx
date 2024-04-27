@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import useStore from '../store'
 import { Button, Card, LinearProgress, Typography, Grid } from '@mui/material'
+import { useTheme } from '@mui/material/styles';
+
 
 const QnA = ({ lines, appBarHeight }) => {
     const defaultColor = { backgroundColor: '#2D6A51', color: 'black' };
+    const theme = useTheme();
 
     const { isLoading, setIsLoading } = useStore();
 
@@ -200,14 +203,8 @@ const QnA = ({ lines, appBarHeight }) => {
                     </Grid>
                 </>
             </Grid>
-            <Grid item container justifyContent="center" alignItems="center" style={{ position: 'absolute', bottom: 0, width: '100%' }}>
-                <Button
-                    onClick={handleReset}
-                    sx={{
-                        backgroundColor: "#2f312f",
-                        "&:hover": { backgroundColor: "#c57d83" }
-                    }}
-                >
+            <Grid item container justifyContent="center" alignItems="flex-end" style={{ flexGrow: 1 }}>
+                <Button onClick={handleReset}>
                     Reset
                 </Button>
             </Grid>
