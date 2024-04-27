@@ -29,9 +29,9 @@ const QnA = ({ lines }) => {
 
     const handleClick = () => {
         setColors({
-            answer1: tasks[currentTaskIndex]?.answer1?.[tasks[currentTaskIndex]?.answer1?.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
-            answer2: tasks[currentTaskIndex]?.answer2?.[tasks[currentTaskIndex]?.answer2?.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
-            answer3: tasks[currentTaskIndex]?.answer3?.[tasks[currentTaskIndex]?.answer3?.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
+            answer1: tasks[currentTaskIndex]?.answer1?.includes('*') ? '#a1f5ce' : '#c57d83',
+            answer2: tasks[currentTaskIndex]?.answer2?.includes('*') ? '#a1f5ce' : '#c57d83',
+            answer3: tasks[currentTaskIndex]?.answer3?.includes('*') ? '#a1f5ce' : '#c57d83',
         });
         setClicked(true);
     }
@@ -53,9 +53,9 @@ const QnA = ({ lines }) => {
         if (currentTaskIndex > 0) {
             setIsLoading(true);
             setColors({
-                answer1: tasks[currentTaskIndex]?.answer1?.[tasks[currentTaskIndex]?.answer1?.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
-                answer2: tasks[currentTaskIndex]?.answer2?.[tasks[currentTaskIndex]?.answer2?.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
-                answer3: tasks[currentTaskIndex]?.answer3?.[tasks[currentTaskIndex]?.answer3?.length - 1] === '*' ? '#a1f5ce' : '#c57d83',
+                answer1: tasks[currentTaskIndex]?.answer1?.includes('*') ? '#a1f5ce' : '#c57d83',
+                answer2: tasks[currentTaskIndex]?.answer2?.includes('*') ? '#a1f5ce' : '#c57d83',
+                answer3: tasks[currentTaskIndex]?.answer3?.includes('*') ? '#a1f5ce' : '#c57d83',
             });
             setCurrentTaskIndex(currentTaskIndex - 1);
             setIsLoading(false);

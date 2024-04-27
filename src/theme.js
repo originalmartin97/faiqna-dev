@@ -24,9 +24,9 @@ export const theme = createTheme({
       main: "#2D6A51",
     },
     secondary: {
-      main: "#F7FAF7",
+      main: "#99bdb1"
     },
-    background: {
+    tertiary: {
       default: "#F7FAF7"
     },
   },
@@ -34,14 +34,14 @@ export const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          backgroundColor: "#ebfce7",
+          backgroundColor: "#F7FAF7",
         },
       },
     },
     MuiButton: {
       defaultProps: {
         variant: "contained",
-        color: "primary",
+
       },
       styleOverrides: {
         root: {
@@ -56,9 +56,6 @@ export const theme = createTheme({
     },
     MuiTypography: {
       styleOverrides: {
-        root: {
-          margin: "1.5rem",
-        },
         h1: {
           fontSize: "2rem",
           fontWeight: "bold",
@@ -83,9 +80,11 @@ export const theme = createTheme({
     },
     MuiDrawer: {
       styleOverrides: {
-        paper: {
-          backgroundColor: "#e1f6ea",
+        root: {
           overflow: "auto",
+        },
+        paper: {
+          backgroundColor: "#f7faf7",
         },
       },
     },
