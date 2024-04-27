@@ -12,6 +12,7 @@ function DashboardScreen() {
   const responses = useLatestResponses();
 
   const sideBarWidth = 250
+  const appBarHeight = 64
   const [selectedDocumentId, setSelectedDocumentId] = useState(null);
   const [openSideBar, setOpenSideBar] = useState(false)
   const toggleSideBar = (event) => {
@@ -61,7 +62,7 @@ function DashboardScreen() {
             toggleSideBar={toggleSideBar}
             sideBarWidth={sideBarWidth}
             close={toggleSideBar} />
-          <Quizlet sideBarWidth={sideBarWidth} responses={responses} />
+          <Quizlet appBarHeight={appBarHeight} responses={responses} />
         </Box>
       </SelectedDocumentContext.Provider>
     </Container >

@@ -6,7 +6,7 @@ import useStore from '../store';
 import { Parser } from '../utils/Parser';
 import QnA from './QnA';
 
-const Quizlet = ({ responses, sideBarWidth }) => {
+const Quizlet = ({ responses, appBarHeight }) => {
     const { selectedDocumentId } = useContext(SelectedDocumentContext);
     const { isFileUploaded } = useStore()
 
@@ -24,7 +24,13 @@ const Quizlet = ({ responses, sideBarWidth }) => {
     const response = useMemo(handleResponse, [responses, selectedDocumentId, isFileUploaded]);
 
     return (
-        <Card>
+        <Card
+            sx={{
+                width: '100vw',
+                height: `calc(100vh - 3 * ${appBarHeight}px)`,
+                overflow: 'auto',
+            }}
+        >
             <InputFile />
             <Divider
             /> {/* Add a black line */}
