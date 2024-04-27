@@ -20,14 +20,17 @@ const ResponseHistory = ({ responses }) => {
                         '&:hover': { backgroundColor: '#e1f6ea' },
                         border: '1px hidden #000',
                         borderRadius: '2rem',
+                        margin: 0,
                     }}
                 >
                     <ListItemIcon
                         sx={{
-                            color: '#2d6a51'
+                            color: '#2d6a51',
+                            minWidth: '32px'
                         }}
                     >
-                        <InboxIcon />
+                        <InboxIcon
+                        />
                     </ListItemIcon>
                     <ListItemText primary={response.title} />
                 </ListItem>
