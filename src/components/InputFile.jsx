@@ -48,7 +48,7 @@ function InputFile() {
         overflow: 'auto', // Add a scrollbar when needed
       }}
     >
-      {!fileUpload && <Typography variant="h6">First, you need to upload a text based file.</Typography>}
+      {!fileUpload && <Typography variant="h6"> Upload a text based file</Typography>}
       <input
         type='file'
         ref={fileInputRef}

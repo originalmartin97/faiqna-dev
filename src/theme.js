@@ -1,22 +1,9 @@
 import { createTheme } from "@mui/material";
 
-const flexCenterColumn = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-};
-
-const flexCenterRow = {
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "center",
-};
 
 export const theme = createTheme({
   typography: {
-    fontFamily: "'Nunito', sans-serif",
+    fontFamily: '"Nunito", sans-serif',
     color: '#F7FAF7'
   },
   palette: {
@@ -41,7 +28,7 @@ export const theme = createTheme({
     MuiButton: {
       defaultProps: {
         variant: "contained",
-
+        padding: "0.5rem"
       },
       styleOverrides: {
         root: {
@@ -51,6 +38,10 @@ export const theme = createTheme({
           fontWeight: "bold",
           textTransform: "none",
           boxShadow: `2px 2.5px 4px 1.5px rgba(0, 0, 0, .25)`,
+          '&:hover': {
+            backgroundColor: '#e1f6ea',
+            color: 'black'
+          },
         },
       },
     },
@@ -73,8 +64,9 @@ export const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: "1rem",
+          borderRadius: "2rem",
           backgroundColor: "#e1f6ea",
+          padding: "1rem",
         },
       },
     },

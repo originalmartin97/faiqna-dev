@@ -33,7 +33,8 @@ export const TopBar = ({ sideBarWidth, toggleSideBar }) => {
         </Typography>
         <Button sx={{
           backgroundColor: "#a1f5ce", color: "black",
-          "&:hover": { backgroundColor: "#c57d83" }
+          "&:hover": { backgroundColor: "#c57d83" },
+          padding: "1rem",
         }} onClick={(event) => { event.stopPropagation(); signOut(auth) }}>
           Log out
         </Button>

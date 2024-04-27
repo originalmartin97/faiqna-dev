@@ -35,7 +35,7 @@ const Quizlet = ({ responses, appBarHeight }) => {
             <Divider
             /> {/* Add a black line */}
             <br />
-            {response && response[0] && response[0].answer1 ? <QnA lines={response}></QnA> : "No questions available"}
+            {response && response[0] && response[0].answer1 ? <QnA lines={response} appBarHeight={appBarHeight}></QnA> : "No questions available"}
         </Card>
     )
 }
