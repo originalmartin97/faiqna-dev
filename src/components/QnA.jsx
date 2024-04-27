@@ -52,12 +52,13 @@ const QnA = ({ lines }) => {
     const handlePrevious = () => {
         if (currentTaskIndex > 0) {
             setIsLoading(true);
+            let newIndex = currentTaskIndex - 1; // Add this line
+            setCurrentTaskIndex(newIndex);
             setColors({
-                answer1: tasks[currentTaskIndex]?.answer1?.includes('*') ? '#a1f5ce' : '#c57d83',
-                answer2: tasks[currentTaskIndex]?.answer2?.includes('*') ? '#a1f5ce' : '#c57d83',
-                answer3: tasks[currentTaskIndex]?.answer3?.includes('*') ? '#a1f5ce' : '#c57d83',
+                answer1: tasks[newIndex]?.answer1?.includes('*') ? '#a1f5ce' : '#c57d83',
+                answer2: tasks[newIndex]?.answer2?.includes('*') ? '#a1f5ce' : '#c57d83',
+                answer3: tasks[newIndex]?.answer3?.includes('*') ? '#a1f5ce' : '#c57d83',
             });
-            setCurrentTaskIndex(currentTaskIndex - 1);
             setIsLoading(false);
             setClicked(true);
         }
