@@ -29,6 +29,8 @@ const AuthenticationScreen = () => {
             console.log(error)
         }
     }
+
+
     return (
         <Container>
             <Box>

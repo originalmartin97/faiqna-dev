@@ -20,7 +20,7 @@ const ResponseHistory = ({ responses }) => {
                         '&:hover': { backgroundColor: '#e1f6ea' },
                         border: '1px hidden #000',
                         borderRadius: '2rem',
-                        margin: 0,
+                        margin: '0.5rem 0.01rem 0.5rem 0.01rem',
                     }}
                 >
                     <ListItemIcon
@@ -32,7 +32,16 @@ const ResponseHistory = ({ responses }) => {
                         <InboxIcon
                         />
                     </ListItemIcon>
-                    <ListItemText primary={response.title} />
+                    <ListItemText
+                        primary={response.id}
+                        title={response.id}
+                        primaryTypographyProps={{ style: { fontWeight: 'bold' } }}
+                        sx={{
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap'
+                        }}
+                    />
                 </ListItem>
             ))}
         </>

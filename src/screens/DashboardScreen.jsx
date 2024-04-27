@@ -11,8 +11,9 @@ import { useLatestResponses } from '../hooks/useLatestResponses';
 function DashboardScreen() {
   const responses = useLatestResponses();
 
-  const sideBarWidth = 250
+  const sideBarWidth = 300
   const appBarHeight = 64
+
   const [selectedDocumentId, setSelectedDocumentId] = useState(null);
   const [openSideBar, setOpenSideBar] = useState(false)
   const toggleSideBar = (event) => {
