@@ -3,16 +3,15 @@ import { useState } from 'react';
 import { storage } from '../firebase';
 import { ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
-import { Button, Box, Typography } from '@mui/material';
+import { Button, Box, Typography, Fab, Hidden, IconButton } from '@mui/material';
 import useStore from '../store';
+import AddIcon from '@mui/icons-material/Add';
 
 function InputFile() {
   const fileInputRef = useRef()
-
   const { setAreResponsesFetched } = useStore()
   const [fileUpload, setFileUpload] = useState(null)
   const [selectedFileName, setSelectedFileName] = useState('') // Add state variable for selected file name
-
   const { setIsFileUploaded } = useStore()
 
   // Function to upload file
@@ -24,12 +23,6 @@ function InputFile() {
       setIsFileUploaded(true);
       setAreResponsesFetched(false);
     });
-
-  };
-
-  // Function to open file dialog
-  const handleFileSelect = () => {
-    fileInputRef.current.click();
   };
 
   // Function to handle file change
@@ -38,27 +31,52 @@ function InputFile() {
     setSelectedFileName(event.target.files[0].name); // Update selected file name
   };
 
+  const handleFileSelectAndUpload = (event) => {
+    handleFileChange(event);
+    uploadFile();
+  };
+
   return (
-    <Box className="InputFile"
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'auto', // Add a scrollbar when needed
-      }}
-    >
-      {!fileUpload && <Typography variant="h6"> Upload a new text based file</Typography>}
-      <input
-        type='file'
-        ref={fileInputRef}
-        onChange={handleFileChange}
-        style={{ display: 'none' }} // Hide the default file input
-      />
-      <Button variant="contained" color="primary" onClick={handleFileSelect}>Choose file</Button>
-      {selectedFileName && <Typography variant='h6'>Selected file: {selectedFileName}</Typography>} {/* Display selected file name */}
-      {fileUpload && <Button variant="contained" color="primary" onClick={uploadFile}>Upload file</Button>}
-    </Box>
+    <>
+      <Hidden smDown>
+        <Box className="InputFile"
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'auto', // Add a scrollbar when needed
+          }}
+        >
+          {!fileUpload && <Typography variant="h6"> Upload a new text based file</Typography>}
+          <input
+            type='file'
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            style={{ display: 'none' }} // Hide the default file input
+          />
+          <Button variant="contained" color="primary" onClick={handleFileSelectAndUpload}>Choose file</Button>
+          {selectedFileName && <Typography variant='h6'>Selected file: {selectedFileName}</Typography>} {/* Display selected file name */}
+          {fileUpload && <Button variant="contained" color="primary" onClick={uploadFile}>Upload file</Button>}
+        </Box>
+      </Hidden>
+      <Hidden mdUp>
+        <Fab color="primary" aria-label="add" sx={{ position: 'fixed', bottom: 16, right: 16 }}>
+          <input
+            accept="text/csv"
+            style={{ display: 'none' }}
+            id="contained-button-file"
+            type="file"
+            onChange={handleFileSelectAndUpload}
+          />
+          <label htmlFor="contained-button-file">
+            <IconButton color="inherit" component="span">
+              <AddIcon />
+            </IconButton>
+          </label>
+        </Fab>
+      </Hidden>
+    </>
   );
 }
 

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import useStore from '../store'
-import { Button, Card, LinearProgress, Typography, Grid } from '@mui/material'
+import { Button, Card, LinearProgress, Typography, Grid, useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles';
 
 
 const QnA = ({ lines, appBarHeight }) => {
     const defaultColor = { backgroundColor: '#2D6A51', color: 'black' };
     const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     const { isLoading, setIsLoading } = useStore();
 
@@ -124,7 +125,7 @@ const QnA = ({ lines, appBarHeight }) => {
         <Grid container direction="row" justifyContent="space-between" style={{ height: `calc(100% - 2* ${appBarHeight}px)`, position: 'relative', paddingBottom: '50px' }}>
             <Grid item>
                 {tasks && tasks[currentTaskIndex] && (
-                    <Typography variant="h4"
+                    <Typography variant={isSmallScreen ? "h6" : "h4"}
                         align="justify"
                         style={{
                             textAlignLast: 'center',
@@ -157,6 +158,7 @@ const QnA = ({ lines, appBarHeight }) => {
                                 e.currentTarget.style.backgroundColor = colors.answer1.backgroundColor;
                                 e.currentTarget.style.color = colors.answer1.color;
                             }}
+                            sx={{ fontSize: isSmallScreen ? '0.7rem' : '1rem' }}
                         >
                             {tasks[currentTaskIndex].answer1}
                         </Button>
@@ -171,6 +173,7 @@ const QnA = ({ lines, appBarHeight }) => {
                                 e.currentTarget.style.backgroundColor = colors.answer2.backgroundColor;
                                 e.currentTarget.style.color = colors.answer2.color;
                             }}
+                            sx={{ fontSize: isSmallScreen ? '0.7rem' : '1rem' }}
                         >
                             {tasks[currentTaskIndex].answer2}
                         </Button>
@@ -185,6 +188,7 @@ const QnA = ({ lines, appBarHeight }) => {
                                 e.currentTarget.style.backgroundColor = colors.answer3.backgroundColor;
                                 e.currentTarget.style.color = colors.answer3.color;
                             }}
+                            sx={{ fontSize: isSmallScreen ? '0.7rem' : '1rem' }}
                         >
                             {tasks[currentTaskIndex].answer3}
                         </Button>
@@ -194,18 +198,26 @@ const QnA = ({ lines, appBarHeight }) => {
             <Grid item container justifyContent="space-between">
                 <>
                     <Grid item>
-                        <Button disabled={currentTaskIndex === 0} onClick={handlePrevious}
+                        <Button
+                            disabled={currentTaskIndex === 0}
+                            onClick={handlePrevious}
                             sx={{
-                                width: "100px"
-                            }}>
+                                width: isSmallScreen ? "80px" : "100px",
+                                fontSize: isSmallScreen ? '0.7rem' : '1rem'
+                            }}
+                        >
                             Previous
                         </Button>
                     </Grid>
                     <Grid item>
-                        <Button disabled={currentTaskIndex >= tasks.length - 1} onClick={handleNext}
+                        <Button
+                            disabled={currentTaskIndex >= tasks.length - 1}
+                            onClick={handleNext}
                             sx={{
-                                width: "100px"
-                            }}>
+                                width: isSmallScreen ? "80px" : "100px",
+                                fontSize: isSmallScreen ? '0.7rem' : '1rem'
+                            }}
+                        >
                             Next
                         </Button>
                     </Grid>
@@ -218,8 +230,10 @@ const QnA = ({ lines, appBarHeight }) => {
                         backgroundColor: "#99bdb1",
                         color: "black",
                         "&:hover": { backgroundColor: "#c57d83" },
-                        padding: "1rem",
-                    }}>
+                        padding: isSmallScreen ? '0.5rem' : '1rem',
+                        fontSize: isSmallScreen ? '0.7rem' : '1rem'
+                    }}
+                >
                     Reset
                 </Button>
             </Grid>
