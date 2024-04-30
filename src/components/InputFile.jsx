@@ -14,26 +14,25 @@ function InputFile() {
   const [selectedFileName, setSelectedFileName] = useState('') // Add state variable for selected file name
   const { setIsFileUploaded } = useStore()
 
+  // Function to handle file change
+  const handleFileChange = (event) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      setSelectedFileName(file.name); // Update selected file name
+      setFileUpload(file); // Set the selected file to the fileUpload state
+      uploadFile(file); // Upload the file
+    }
+  };
+
   // Function to upload file
-  const uploadFile = () => {
-    if (fileUpload == null) return;
-    const fileRef = ref(storage, `files/${fileUpload.name + v4()}`);
-    uploadBytes(fileRef, fileUpload).then(() => {
+  const uploadFile = (file) => {
+    if (file == null) return;
+    const fileRef = ref(storage, `files/${file.name + v4()}`);
+    uploadBytes(fileRef, file).then(() => {
       alert('File uploaded');
       setIsFileUploaded(true);
       setAreResponsesFetched(false);
     });
-  };
-
-  // Function to handle file change
-  const handleFileChange = (event) => {
-    setFileUpload(event.target.files[0]);
-    setSelectedFileName(event.target.files[0].name); // Update selected file name
-  };
-
-  const handleFileSelectAndUpload = (event) => {
-    handleFileChange(event);
-    uploadFile();
   };
 
   return (
@@ -55,19 +54,18 @@ function InputFile() {
             onChange={handleFileChange}
             style={{ display: 'none' }} // Hide the default file input
           />
-          <Button variant="contained" color="primary" onClick={handleFileSelectAndUpload}>Choose file</Button>
+          <Button variant="contained" color="primary" onClick={() => fileInputRef.current.click()}>Upload file</Button>
           {selectedFileName && <Typography variant='h6'>Selected file: {selectedFileName}</Typography>} {/* Display selected file name */}
-          {fileUpload && <Button variant="contained" color="primary" onClick={uploadFile}>Upload file</Button>}
         </Box>
       </Hidden>
       <Hidden mdUp>
         <Fab color="primary" aria-label="add" sx={{ position: 'fixed', bottom: 16, right: 16 }}>
           <input
-            accept="text/csv"
+            accept="text/plain"
             style={{ display: 'none' }}
             id="contained-button-file"
             type="file"
-            onChange={handleFileSelectAndUpload}
+            onChange={handleFileChange}
           />
           <label htmlFor="contained-button-file">
             <IconButton color="inherit" component="span">

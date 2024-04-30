@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ListItem, ListItemText, ListItemIcon } from '@mui/material';
+import { ListItem, ListItemText, ListItemIcon, Typography, Divider } from '@mui/material';
 import InboxIcon from '@mui/icons-material/Inbox';
 import { SelectedDocumentContext } from '../contexts/SelectedDocumentContext';
 import useStore from '../store';
@@ -11,6 +11,10 @@ const ResponseHistory = ({ responses }) => {
 
     return (
         <>
+            <Typography variant="h6" align='center' paddingTop="1rem">
+                <b>Response History</b>
+            </Typography>
+            <Divider />
             {responses && responses.map((response, index) => (
                 <ListItem
                     button

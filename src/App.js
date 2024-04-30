@@ -19,7 +19,6 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/*        <Route path="/history/:id" element={<ShowResponse />} /> */}
         <Route path="/" element={<PublicRoute Component={AuthenticationScreen} />} />
         <Route path="/dashboard" element={<PrivateRoute Component={DashboardScreen} />} />
       </Routes>

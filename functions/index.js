@@ -31,19 +31,30 @@ exports.processFile = functions.storage.object().onFinalize(async (object) => {
   let prompt;
 
   const parametersStart =
-
-    'Generate 3 to 10 questions, each with exactly 3 possible answers, one of which is correct based on the given text below. Put a * after the exactly correct answer!' +
-    ' Do not use any number, letter, emphasis, or anything like that in generating the question and answers.' +
-    ' Use only the following format style and structure in your answer:\n' +
-    '(the generated question)\n' +
-    '(the first possible answer)\n' +
-    '(the second possible answer)\n' +
-    '(the third possible answer)\n' +
-    'Please ensure the response follows this exact format without any deviation.\n' +
-    'The given text:\n"'
+    `Imagine you are a teacher preparing a reading comprehension quiz for your students. You have a document (provided below) and you want to create a short assessment with the following format:\n` +
+    `3 to 10 High-Quality Questions: These questions should test the reader's understanding of the key points and details in the document.\n` +
+    `Exactly 3 Answer Choices: For each question, provide three answer options, ensuring they are clear, concise, and cover a range of possibilities.\n` +
+    `Right Answer Marked with "*": Indicate the most accurate answer for each question by placing an asterisk (*) in front of it.\n` +
+    `Here's an example to get you started:\n` +
+    `Document: The quick brown fox jumps over the lazy dog.\n\n` +
+    `Question 1: What color is the fox in the sentence?\n` +
+    `(a) Brown * \n` +
+    `(b) Quick\n` +
+    `(c) Unknown\n\n` +
+    `Your Task:\n\n` +
+    `Analyze the document provided below and generate a reading comprehension quiz following the format described above.\n` +
+    `Please note:\n\n` +
+    `You don't need to access any external information or knowledge beyond the provided document.\n` +
+    `Focus on creating clear, well-structured questions that assess various aspects of the document's content.\n` +
+    `Document:\n`
 
   const parametersEnd =
-    '"'
+    `Additional Tips:\n` +
+    `The number of questions can vary between 3 and 10, but aim for a good balance that covers the important information.\n` +
+    `Make sure the answer choices are plausible and don't directly quote the document.\n` +
+    `The right answer should be demonstrably correct based on the document's content.\n` +
+    `Only generate the questions and answer choices – no explanations or feedback are needed.\n` +
+    `The questions should be in the same language as the document.\n`
 
   const fileExtension = path.extname(filePath);
   if (fileExtension === '.docx') {

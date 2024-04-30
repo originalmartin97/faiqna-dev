@@ -167,7 +167,7 @@ const QnA = ({ lines, appBarHeight }) => {
                             }}
                             sx={{ fontSize: isSmallScreen ? '0.7rem' : '1rem' }}
                         >
-                            {tasks[currentTaskIndex].answer1}
+                            {tasks[currentTaskIndex].answer1.replace('*', '')}
                         </Button>
                         <Button
                             onClick={handleClick}
@@ -182,7 +182,7 @@ const QnA = ({ lines, appBarHeight }) => {
                             }}
                             sx={{ fontSize: isSmallScreen ? '0.7rem' : '1rem' }}
                         >
-                            {tasks[currentTaskIndex].answer2}
+                            {tasks[currentTaskIndex].answer2.replace('*', '')}
                         </Button>
                         <Button
                             onClick={handleClick}
@@ -197,7 +197,7 @@ const QnA = ({ lines, appBarHeight }) => {
                             }}
                             sx={{ fontSize: isSmallScreen ? '0.7rem' : '1rem' }}
                         >
-                            {tasks[currentTaskIndex].answer3}
+                            {tasks[currentTaskIndex].answer3.replace('*', '')}
                         </Button>
                     </Card>
                 )}
