@@ -8,11 +8,11 @@ import useStore from '../store';
 import AddIcon from '@mui/icons-material/Add';
 
 function InputFile() {
-  const fileInputRef = useRef()
-  const { setAreResponsesFetched } = useStore()
-  const [fileUpload, setFileUpload] = useState(null)
-  const [selectedFileName, setSelectedFileName] = useState('') // Add state variable for selected file name
-  const { setIsFileUploaded } = useStore()
+  const fileInputRef = useRef();
+  const { setAreResponsesFetched } = useStore();
+  const [fileUpload, setFileUpload] = useState(null);
+  const [selectedFileName, setSelectedFileName] = useState(''); // Add state variable for selected file name
+  const { setIsFileUploaded } = useStore();
 
   // Function to handle file change
   const handleFileChange = (event) => {
@@ -38,7 +38,8 @@ function InputFile() {
   return (
     <>
       <Hidden smDown>
-        <Box className="InputFile"
+        <Box
+          className="InputFile"
           sx={{
             display: 'flex',
             flexDirection: 'row',
@@ -54,7 +55,9 @@ function InputFile() {
             onChange={handleFileChange}
             style={{ display: 'none' }} // Hide the default file input
           />
-          <Button variant="contained" color="primary" onClick={() => fileInputRef.current.click()}>Upload file</Button>
+          <Button variant="contained" color="primary" onClick={() => fileInputRef.current.click()}>
+            Upload file
+          </Button>
           {selectedFileName && <Typography variant='h6'>Selected file: {selectedFileName}</Typography>} {/* Display selected file name */}
         </Box>
       </Hidden>
