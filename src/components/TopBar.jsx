@@ -9,12 +9,15 @@ import Button from '@mui/material/Button';
 import Hidden from '@mui/material/Hidden';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
+import useStore from '../store';
 
 // TopBar component
 export const TopBar = ({ sideBarWidth, toggleSideBar }) => {
+  const { setLoginStatus } = useStore(); // Gets the setLoginStatus function from the store
   // Function to handle sign out
   const handleSignOut = (event) => {
     event.stopPropagation(); // Prevents the event from bubbling up the DOM tree
+    setLoginStatus(false); // Sets the login status to false (user is not logged in)
     signOut(auth); // Signs out the user
   };
 

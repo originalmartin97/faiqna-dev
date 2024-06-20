@@ -4,7 +4,8 @@ import InputFile from './InputFile'
 import { SelectedDocumentContext } from '../contexts/SelectedDocumentContext';
 import useStore from '../store';
 import { Parser } from '../utils/Parser';
-import QnA from './QnA';
+import QnA from './QnA'
+import Loader from './Loader';
 
 const Quizlet = ({ responses, appBarHeight }) => {
     const { selectedDocumentId } = useContext(SelectedDocumentContext);
@@ -29,13 +30,18 @@ const Quizlet = ({ responses, appBarHeight }) => {
                 width: '100vw',
                 height: `calc(100vh - 3 * ${appBarHeight}px)`,
                 overflow: 'auto',
+                display: 'flex', // Add this
+                flexDirection: 'column', // Add this
             }}
         >
             <InputFile />
-            <Divider
-            /> {/* Add a black line */}
+            <Divider /> {/* Add a black line */}
             <br />
-            {response && response[0] && response[0].answer1 ? <QnA lines={response} appBarHeight={appBarHeight}></QnA> : "No questions available"}
+            {response && response[0] && response[0].answer1 ? (
+                <QnA lines={response} appBarHeight={appBarHeight} />
+            ) : (
+                <Loader />
+            )}
         </Card>
     )
 }

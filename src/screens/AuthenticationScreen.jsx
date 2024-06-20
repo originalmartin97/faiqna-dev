@@ -33,38 +33,44 @@ const AuthenticationScreen = () => {
 
     return (
         <>
-            <Container>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        margin: '2rem',
-                    }}
-                >
-                    <Typography
-                        variant="h1"
-                        align="center"
-                        style={{
-                            textDecoration: 'underline',
-                            whiteSpace: 'normal',
-                            wordWrap: 'break-word',
-                            textAlignLast: 'center',
-                        }}
-                    >
-                        Welcome to FAIQnA!
-                    </Typography>
-                </Box >
-            </Container>
-            <Container
-                style={{
+            <Box
+                sx={{
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '100%',
-                    mt: '3rem',
+                    margin: '3.5rem',
                 }}
             >
-                <Card>
+                <Typography
+                    variant="h1"
+                    align="center"
+                    style={{
+                        textDecoration: 'underline',
+                        whiteSpace: 'normal',
+                        wordWrap: 'break-word',
+                        textAlignLast: 'center',
+                    }}
+                >
+                    Welcome to FAIQnA!
+                </Typography>
+            </Box >
+            <Container
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+            >
+                <Card
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: '100%',
+                        maxWidth: '600px',
+                    }}
+                >
                     <Typography variant="h6" align="center">
                         Sign in
                     </Typography>
@@ -137,7 +143,7 @@ const AuthenticationScreen = () => {
                         </Box>
                     </Box>
                 </Card>
-            </Container>
+            </Container >
         </>
     )
 }

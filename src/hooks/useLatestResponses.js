@@ -7,7 +7,7 @@ const db = getFirestore(app)
 
 export const useLatestResponses = () => {
     const [latestResponses, setLatestResponses] = useState([])
-    const { areResponsesFetched, setAreResponsesFetched } = useStore()
+    const { setIsLoading, areResponsesFetched, setAreResponsesFetched } = useStore()
 
 
     useEffect(() => {
@@ -16,6 +16,7 @@ export const useLatestResponses = () => {
 
             const unsubscribe = onSnapshot(documentQuery, (snapshot) => {
                 try {
+                    setIsLoading(true)
                     const newResponses = snapshot.docs.map(doc => ({
                         id: doc.id,
                         title: doc.data().parentMessageId,
@@ -23,6 +24,7 @@ export const useLatestResponses = () => {
                     }))
                     setLatestResponses(newResponses)
                     setAreResponsesFetched(true)
+                    setIsLoading(false) // Set isLoading to false here
                     console.log(newResponses)
                 } catch (error) {
                     console.error("Error processing snapshot: ", error);

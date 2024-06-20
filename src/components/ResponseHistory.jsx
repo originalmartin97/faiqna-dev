@@ -3,6 +3,7 @@ import { ListItem, ListItemText, ListItemIcon, Typography, Divider } from '@mui/
 import InboxIcon from '@mui/icons-material/Inbox';
 import { SelectedDocumentContext } from '../contexts/SelectedDocumentContext';
 import useStore from '../store';
+import Loader from './Loader';
 
 const ResponseHistory = ({ responses }) => {
 
@@ -15,7 +16,7 @@ const ResponseHistory = ({ responses }) => {
                 <b>Response History</b>
             </Typography>
             <Divider />
-            {responses && responses.map((response, index) => (
+            {responses ? responses.map((response, index) => (
                 <ListItem
                     button
                     key={index}
@@ -47,7 +48,9 @@ const ResponseHistory = ({ responses }) => {
                         }}
                     />
                 </ListItem>
-            ))}
+            )) : (
+                <Loader />
+            )}
         </>
     );
 };
