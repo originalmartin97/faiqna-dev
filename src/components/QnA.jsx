@@ -14,7 +14,7 @@ const QnA = ({ lines, appBarHeight }) => {
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     // Loading state from the store
-    const { isLoading, setIsLoading } = useStore();
+    const { isLoading, setIsLoading, setSnackbarOpen, setSnackbarMessage } = useStore();
 
     // State variables
     const [clicked, setClicked] = useState(false);
@@ -42,14 +42,21 @@ const QnA = ({ lines, appBarHeight }) => {
         });
     }
 
-    // Function to color answers based on the index
-    const colorAnswers = (index) => {
-        if (index >= 0 && index < tasks.length) {
-            setColors({
-                answer1: tasks[index]?.answer1?.includes('*') ? { backgroundColor: '#a1f5ce', color: 'black' } : { backgroundColor: '#c57d83', color: 'black' },
-                answer2: tasks[index]?.answer2?.includes('*') ? { backgroundColor: '#a1f5ce', color: 'black' } : { backgroundColor: '#c57d83', color: 'black' },
-                answer3: tasks[index]?.answer3?.includes('*') ? { backgroundColor: '#a1f5ce', color: 'black' } : { backgroundColor: '#c57d83', color: 'black' },
-            });
+    // Function to color answers based on the index and determine if the clicked answer is correct
+    const colorAnswers = (taskIndex, clickedAnswerIndex) => {
+        if (taskIndex >= 0 && taskIndex < tasks.length) {
+            const newColors = {
+                answer1: tasks[taskIndex]?.answer1?.includes('*') ? { backgroundColor: '#a1f5ce' } : { backgroundColor: '#c57d83' },
+                answer2: tasks[taskIndex]?.answer2?.includes('*') ? { backgroundColor: '#a1f5ce' } : { backgroundColor: '#c57d83' },
+                answer3: tasks[taskIndex]?.answer3?.includes('*') ? { backgroundColor: '#a1f5ce' } : { backgroundColor: '#c57d83' },
+            };
+            setColors(newColors);
+
+            // Determine if the clicked answer is correct
+            const clickedAnswerKey = `answer${clickedAnswerIndex}`;
+            const isCorrect = tasks[taskIndex][clickedAnswerKey]?.includes('*');
+            const message = isCorrect ? "True" : "False";
+            setSnackbarMessage(message); // Set the snackbar message based on correctness
         }
     }
 
@@ -62,10 +69,12 @@ const QnA = ({ lines, appBarHeight }) => {
 
     // Function to handle click on an answer
     const handleClick = (answerNumber) => {
-        colorAnswers(currentTaskIndex);
+        // Pass the answerNumber correctly to colorAnswers
+        colorAnswers(currentTaskIndex, answerNumber);
         setClicked(true);
         setIsAnswered(true);
         setColoredIndices(prevIndices => [...prevIndices, currentTaskIndex]);
+        setSnackbarOpen(true);
     }
 
     // Function to handle next button click
@@ -155,7 +164,7 @@ const QnA = ({ lines, appBarHeight }) => {
                     >
                         {/* Answer buttons */}
                         <Button
-                            onClick={handleClick}
+                            onClick={() => handleClick(1)}
                             style={colors.answer1}
                             onMouseOver={(e) => {
                                 e.currentTarget.style.backgroundColor = '#a1f5ce';
@@ -170,7 +179,7 @@ const QnA = ({ lines, appBarHeight }) => {
                             {tasks[currentTaskIndex].answer1.replace('*', '')}
                         </Button>
                         <Button
-                            onClick={handleClick}
+                            onClick={() => handleClick(2)}
                             style={colors.answer2}
                             onMouseOver={(e) => {
                                 e.currentTarget.style.backgroundColor = '#a1f5ce';
@@ -185,7 +194,7 @@ const QnA = ({ lines, appBarHeight }) => {
                             {tasks[currentTaskIndex].answer2.replace('*', '')}
                         </Button>
                         <Button
-                            onClick={handleClick}
+                            onClick={() => handleClick(3)}
                             style={colors.answer3}
                             onMouseOver={(e) => {
                                 e.currentTarget.style.backgroundColor = '#a1f5ce';
