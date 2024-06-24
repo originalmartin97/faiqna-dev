@@ -15,10 +15,16 @@ import useStore from '../store';
 export const TopBar = ({ sideBarWidth, toggleSideBar }) => {
   const { setLoginStatus } = useStore(); // Gets the setLoginStatus function from the store
   // Function to handle sign out
-  const handleSignOut = (event) => {
-    event.stopPropagation(); // Prevents the event from bubbling up the DOM tree
-    setLoginStatus(false); // Sets the login status to false (user is not logged in)
-    signOut(auth); // Signs out the user
+  const handleSignOut = async (event) => {
+    try {
+      event.stopPropagation(); // Prevents the event from bubbling up the DOM tree
+      await signOut(auth);
+      event.stopPropagation(); // Prevents the event from bubbling up the DOM tree
+      setLoginStatus(false); // Sets the login status to false (user is not logged in)
+      useStore.getState().resetState(); // Reset the state after signing out
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
   };
 
   // Returns the TopBar component

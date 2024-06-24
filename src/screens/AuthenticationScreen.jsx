@@ -3,6 +3,7 @@ import { auth } from '../firebase'
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import { googleProvider } from '../firebase'
 import { Container, Box, Typography, Card, TextField, Button } from '@mui/material'
+import mySnackbar from '../components/Snackbar'
 
 const initForm = {
     email: '',
@@ -17,15 +18,23 @@ const AuthenticationScreen = () => {
         try {
             setLoading(true)
             await signInWithEmailAndPassword(auth, form.email, form.password)
-        } catch (error) {
-            console.log(error)
             setLoading(false)
+        } catch (error) {
+            setLoading(false)
+            console.log(error)
         }
     }
     const handleSignInWithGoogle = async () => {
         try {
-            await signInWithPopup(auth, googleProvider);
+            setLoading(true)
+            await signInWithPopup(auth, googleProvider)
+            setLoading(false)
+            mySnackbar("Signed in Successfully!", true)
+            setTimeout(() => {
+                mySnackbar("Success!", true)
+            }, 3000)
         } catch (error) {
+            setLoading(false)
             console.log(error)
         }
     }
