@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import useStore from '../store'
 import { Button, Card, LinearProgress, Typography, Grid, useMediaQuery } from '@mui/material'
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles'
 
 // QnA component
 const QnA = ({ lines, appBarHeight }) => {

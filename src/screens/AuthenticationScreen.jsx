@@ -3,7 +3,8 @@ import { auth } from '../firebase'
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import { googleProvider } from '../firebase'
 import { Container, Box, Typography, Card, TextField, Button } from '@mui/material'
-import mySnackbar from '../components/Snackbar'
+import MySnackbar from '../components/MySnackbar'
+import useStore from '../store'
 
 const initForm = {
     email: '',
@@ -11,6 +12,7 @@ const initForm = {
 }
 
 const AuthenticationScreen = () => {
+    const { setSnackbarMessage, setSnackbarOpen } = useStore()
     const [loading, setLoading] = useState(false)
     const [form, setForm] = useState(initForm)
     const handleChange = (event) => setForm((oldForm) => ({ ...oldForm, [event.target.name]: event.target.value }))
@@ -28,11 +30,8 @@ const AuthenticationScreen = () => {
         try {
             setLoading(true)
             await signInWithPopup(auth, googleProvider)
+            setSnackbarMessage('Successfully signed in with Google')
             setLoading(false)
-            mySnackbar("Signed in Successfully!", true)
-            setTimeout(() => {
-                mySnackbar("Success!", true)
-            }, 3000)
         } catch (error) {
             setLoading(false)
             console.log(error)

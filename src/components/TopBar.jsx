@@ -10,6 +10,7 @@ import Hidden from '@mui/material/Hidden';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import useStore from '../store';
+import MySnackbar from './MySnackbar';
 
 // TopBar component
 export const TopBar = ({ sideBarWidth, toggleSideBar }) => {
@@ -30,6 +31,7 @@ export const TopBar = ({ sideBarWidth, toggleSideBar }) => {
   // Returns the TopBar component
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "#2f312F" }}>
+      <MySnackbar></MySnackbar>
       <Toolbar
         sx={{
           // Adjusts the left margin based on the screen size
