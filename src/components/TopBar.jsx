@@ -14,15 +14,17 @@ import MySnackbar from './MySnackbar';
 
 // TopBar component
 export const TopBar = ({ sideBarWidth, toggleSideBar }) => {
-  const { setLoginStatus } = useStore(); // Gets the setLoginStatus function from the store
+  const { setLoginStatus, setSnackbarMessage, setSnackbarOpen } = useStore(); // Gets the setLoginStatus function from the store
   // Function to handle sign out
   const handleSignOut = async (event) => {
     try {
-      event.stopPropagation(); // Prevents the event from bubbling up the DOM tree
-      await signOut(auth);
-      event.stopPropagation(); // Prevents the event from bubbling up the DOM tree
-      setLoginStatus(false); // Sets the login status to false (user is not logged in)
-      useStore.getState().resetState(); // Reset the state after signing out
+      event.stopPropagation() // Prevents the event from bubbling up the DOM tree
+      await signOut(auth) // Signs out the user
+      event.stopPropagation() // Prevents the event from bubbling up the DOM tree
+      setLoginStatus(false) // Sets the login status to false (user is not logged in)
+      useStore.getState().resetState() // Reset the state after signing out
+      setSnackbarMessage("Succesfuly logged out! Hope to see you soon!") // Sets the Snackbar message
+      setSnackbarOpen(true) // Opens the Snackbar
     } catch (error) {
       console.error("Error signing out: ", error);
     }
@@ -31,7 +33,6 @@ export const TopBar = ({ sideBarWidth, toggleSideBar }) => {
   // Returns the TopBar component
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "#2f312F" }}>
-      <MySnackbar></MySnackbar>
       <Toolbar
         sx={{
           // Adjusts the left margin based on the screen size

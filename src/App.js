@@ -8,6 +8,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import AuthenticationScreen from './screens/AuthenticationScreen'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import HomeScreen from './screens/HomeScreen'
+import MySnackbar from './components/MySnackbar'
 
 function App() {
   const { setLoginStatus } = useStore()
@@ -19,6 +20,7 @@ function App() {
   }, [setLoginStatus]);
   return (
     <Router>
+      <MySnackbar></MySnackbar>
       <Routes>
         <Route path="/" element={<PublicRoute Component={AuthenticationScreen} />} />
         <Route path="/auth" element={<PublicRoute Component={AuthenticationScreen} />} />
