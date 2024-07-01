@@ -31,30 +31,35 @@ exports.processFile = functions.storage.object().onFinalize(async (object) => {
   let prompt;
 
   const parametersStart =
-    `Imagine you are a teacher preparing a reading comprehension quiz for your students. You have a document (provided below) and you want to create a short assessment with the following format:\n` +
-    `3 to 10 High-Quality Questions: These questions should test the reader's understanding of the key points and details in the document.\n` +
-    `Exactly 3 Answer Choices: For each question, provide three answer options, ensuring they are clear, concise, and cover a range of possibilities.\n` +
-    `Right Answer Marked with "*": Indicate the most accurate answer for each question by placing an asterisk (*) in front of it.\n` +
-    `Here's an example to get you started:\n` +
-    `Document: The quick brown fox jumps over the lazy dog.\n\n` +
-    `Question 1: What color is the fox in the sentence?\n` +
-    `(a) Brown * \n` +
-    `(b) Quick\n` +
-    `(c) Unknown\n\n` +
-    `Your Task:\n\n` +
-    `Analyze the document provided below and generate a reading comprehension quiz following the format described above.\n` +
-    `Please note:\n\n` +
-    `You don't need to access any external information or knowledge beyond the provided document.\n` +
-    `Focus on creating clear, well-structured questions that assess various aspects of the document's content.\n` +
-    `Document:\n`
+    `Task: Create a reading comprehension quiz based on the provided document.\n\n` +
+
+    ` Format:\n\n` +
+
+    `1. Questions: Develop 3 to 10 questions that evaluate key points and details from the document.\n` +
+    `2. Answer Choices: Provide exactly 3 answer options for each question.\n` +
+    `3. Correct Answer: Indicate the correct answer by placing an asterisk(*) in front of it.\n\n` +
+    `Example:\n` +
+    `Document: "The quick brown fox jumps over the lazy dog."\n` +
+    `Question: What color is the fox in the sentence ?\n` +
+    `(a) Quick\n` +
+    `(b) Brown\n` +
+    `(c) Lazy\n\n` +
+
+    ` Instructions:\n\n` +
+
+    `1. Analyze the document to create questions that accurately test comprehension.\n` +
+    `2. Ensure answer choices are clear, concise, and plausible.\n` +
+    `3. The correct answer must be clearly supported by the document.\n` +
+    `4. Do not include explanations or feedback—only the questions and answer choices.\n` +
+    `5. Maintain the same language as the document.\n\n` +
+
+    `Document:\n`;
+  // HERE GOES THE GIVEN TEXT FOR THE PROMPT TO CHEW ON
 
   const parametersEnd =
-    `Additional Tips:\n` +
-    `The number of questions can vary between 3 and 10, but aim for a good balance that covers the important information.\n` +
-    `Make sure the answer choices are plausible and don't directly quote the document.\n` +
-    `The right answer should be demonstrably correct based on the document's content.\n` +
-    `Only generate the questions and answer choices – no explanations or feedback are needed.\n` +
-    `The questions should be in the same language as the document.\n`
+    `\nAdditional Tips:\n` +
+    `Questions should cover a range of content from the document.\n` +
+    `Ensure the questions are clear and free of ambiguity.`
 
   const fileExtension = path.extname(filePath);
   if (fileExtension === '.docx') {
